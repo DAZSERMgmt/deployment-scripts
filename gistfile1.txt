@@ -1,0 +1,44 @@
+Disable-MicrosoftUpdate
+Disable-BingSearch
+Set-WindowsExplorerOptions -EnableShowHiddenFilesFoldersDrives -DisableOpenFileExplorerToQuickAccess -EnableShowFileExtensions -EnableShowFullPathInTitleBar -EnableShowRecentFilesInQuickAccess -EnableShowFrequentFoldersInQuickAccess -EnableExpandToOpenFolder
+Set-ExecutionPolicy Unsigned
+
+cinstm powershell
+cinstm 7zip.install
+cinstm atom
+cinstm baretail
+cinstm calibre
+cinstm ccleaner
+cinstm ccenhancer
+cinstm deluge
+cinstm DotNet4.5
+cinstm firefox
+cinstm git.install
+cinstm glasswire
+cinstm greenshot
+cinstm googledrive
+cinstm handbrake.install
+cinstm itunes
+cinstm lastpass
+cinstm libreoffice
+cinstm malwarebytes
+cinstm mp3tag
+cinstm mysql.workbench
+cinstm putty.install
+cinstm rdcman
+cinstm rdmfree
+cinstm setpoint
+cinstm skype
+cinstm slack
+cinstm spotify
+cinstm sublimetext3
+cinstm sumatrapdf
+cinstm treesizefree
+cinstm ussf
+cinstm vcredist2008
+cinstm vcredist2013
+cinstm vlc
+cinstm wget
+
+Enable-MicrosoftUpdate
+Install-WindowsUpdate -acceptEula True
