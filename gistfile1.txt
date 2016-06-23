@@ -9,13 +9,15 @@ $Boxstarter.AutoLogin=$true
 	Set-WindowsExplorerOptions -EnableShowHiddenFilesFoldersDrives -DisableOpenFileExplorerToQuickAccess -EnableShowFileExtensions -EnableShowFullPathInTitleBar -EnableShowRecentFilesInQuickAccess -EnableShowFrequentFoldersInQuickAccess -EnableExpandToOpenFolder
 	Update-ExecutionPolicy RemoteSigned
 
-	Move-LibraryDirectory "My Pictures" "D:\Pictures"
-	Move-LibraryDirectory "My Video" "D:\Videos"
-	Move-LibraryDirectory "My Music" "D:\Music"
-	Move-LibraryDirectory "Downloads" "D:\Downloads"
-	Move-LibraryDirectory "Personal" "D:\Documents"
-	Move-LibraryDirectory "Desktop" "D:\Desktop"
-
+	if (Test-Path D:) {
+		Move-LibraryDirectory "My Pictures" "D:\Pictures"
+		Move-LibraryDirectory "My Video" "D:\Videos"
+		Move-LibraryDirectory "My Music" "D:\Music"
+		Move-LibraryDirectory "Downloads" "D:\Downloads"
+		Move-LibraryDirectory "Personal" "D:\Documents"
+		Move-LibraryDirectory "Desktop" "D:\Desktop"
+	}
+	
 # Updates & Backend
 	choco install chocolatey -y
 	choco install powershell -y
