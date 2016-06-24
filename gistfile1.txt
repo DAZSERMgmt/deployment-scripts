@@ -21,8 +21,6 @@ $Boxstarter.AutoLogin=$true
 # Updates & Backend
 	choco install chocolatey -y
 	choco install powershell -y
-	
-	if (Test-PendingReboot) { Invoke-Reboot }
 
 	choco install DotNet3.5 -y
 	choco install DotNet4.0 -y
@@ -32,9 +30,7 @@ $Boxstarter.AutoLogin=$true
 	choco install vcredist2010 -y
 	choco install vcredist2012 -y
 	choco install vcredist2013 -y
-	choco install geforce-experience -y
-
-	if (Test-PendingReboot) { Invoke-Reboot }
+	# choco install geforce-experience -y
 
 # Tools
 	choco install 7zip.install -y
@@ -51,8 +47,6 @@ $Boxstarter.AutoLogin=$true
 	choco install setpoint -y
 	choco install ussf -y
 	choco install wget -y
-
-	if (Test-PendingReboot) { Invoke-Reboot }
 
 # Applications
 	choco install atom -y
@@ -80,8 +74,6 @@ $Boxstarter.AutoLogin=$true
 	choco install treesizefree -y
 	choco install vlc -y
 
-	if (Test-PendingReboot) { Invoke-Reboot }
-
 # Browsers
 	choco install firefox -y
 	choco install googlechrome.canary -y
@@ -93,4 +85,3 @@ $Boxstarter.AutoLogin=$true
 choco install Microsoft-Windows-Subsystem-Linux -source windowsfeatures -y
 Enable-MicrosoftUpdate
 Install-WindowsUpdate -acceptEula
-if (Test-PendingReboot) { Invoke-Reboot }
