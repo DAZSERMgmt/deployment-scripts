@@ -1,6 +1,7 @@
 # START http://boxstarter.org/package/nr/url?
 
 $Boxstarter.RebootOk=$true
+$Boxstarter.NoPassword=$false
 $Boxstarter.AutoLogin=$true
 
 # Windows Stuff
@@ -48,6 +49,12 @@ $Boxstarter.AutoLogin=$true
 	choco install ussf -y
 	choco install wget -y
 
+# Fonts
+	choco install sourcecodepro -y
+	choco install inconsolata -y
+	choco install robotofonts -y
+	choco install opensans -y
+
 # Applications
 	choco install atom -y
 	choco install calibre -y
@@ -79,7 +86,9 @@ $Boxstarter.AutoLogin=$true
 	choco install googlechrome.canary -y
 	choco install googlechrome.dev -y
 
-	Install-ChocolateyPinnedTaskBarItem "$($Boxstarter.programFiles)\Google\Chrome\Application\chrome.exe"
+	Install-ChocolateyPinnedTaskBarItem "$env:localappdata\Google\Chrome\Application\chrome.exe"
+	Install-ChocolateyPinnedTaskBarItem "$env:windir\explorer.exe"
+	Install-ChocolateyPinnedTaskBarItem "$env:SystemRoot\system32\WindowsPowerShell\v1.0\powershell.exe"
 
 # Windows Stuff
 choco install Microsoft-Windows-Subsystem-Linux -source windowsfeatures -y
