@@ -5,10 +5,11 @@ $Boxstarter.NoPassword=$false
 $Boxstarter.AutoLogin=$true
 
 # Windows Stuff
-	Disable-MicrosoftUpdate
 	Disable-BingSearch
 	Set-WindowsExplorerOptions -EnableShowHiddenFilesFoldersDrives -DisableOpenFileExplorerToQuickAccess -EnableShowFileExtensions -EnableShowFullPathInTitleBar -EnableShowRecentFilesInQuickAccess -EnableShowFrequentFoldersInQuickAccess -EnableExpandToOpenFolder
 	Update-ExecutionPolicy RemoteSigned
+
+	tzutil /s "Eastern Standard Time"
 
 	if (Test-Path D:) {
 		Move-LibraryDirectory "My Pictures" "D:\Pictures"
@@ -18,7 +19,7 @@ $Boxstarter.AutoLogin=$true
 		Move-LibraryDirectory "Personal" "D:\Documents"
 		Move-LibraryDirectory "Desktop" "D:\Desktop"
 	}
-	
+
 # Updates & Backend
 	choco install chocolatey -y
 	choco install powershell -y
@@ -91,6 +92,11 @@ $Boxstarter.AutoLogin=$true
 	Install-ChocolateyPinnedTaskBarItem "$env:SystemRoot\system32\WindowsPowerShell\v1.0\powershell.exe"
 
 # Windows Stuff
-choco install Microsoft-Windows-Subsystem-Linux -source windowsfeatures -y
+	#Show Powershell on Win+X instead of Command Prompt
+	Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name DontUsePowerShellOnWinX -Value 0
+
+	#Install WSL
+	choco install Microsoft-Windows-Subsystem-Linux -source windowsfeatures -y
+
 Enable-MicrosoftUpdate
 Install-WindowsUpdate -acceptEula
