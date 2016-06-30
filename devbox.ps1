@@ -11,7 +11,7 @@ $Boxstarter.AutoLogin=$true
 
 	tzutil /s "Eastern Standard Time"
 
-	if (Test-Path D:) {
+	if ((Test-Path D:) -and ((Get-Volume -DriveLetter D | Select -ExpandProperty DriveType) -eq "Fixed")) {
 		Move-LibraryDirectory "My Pictures" "D:\Pictures"
 		Move-LibraryDirectory "My Video" "D:\Videos"
 		Move-LibraryDirectory "My Music" "D:\Music"
