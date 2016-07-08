@@ -5,6 +5,7 @@ $Boxstarter.NoPassword=$false
 $Boxstarter.AutoLogin=$true
 
 # Windows Stuff
+	Disable-UAC
 	Disable-BingSearch
 	Set-WindowsExplorerOptions -EnableShowHiddenFilesFoldersDrives -DisableOpenFileExplorerToQuickAccess -EnableShowFileExtensions -EnableShowFullPathInTitleBar -EnableShowRecentFilesInQuickAccess -EnableShowFrequentFoldersInQuickAccess -EnableExpandToOpenFolder
 	Update-ExecutionPolicy RemoteSigned
@@ -32,9 +33,10 @@ $Boxstarter.AutoLogin=$true
 	choco install vcredist2010 -y
 	choco install vcredist2012 -y
 	choco install vcredist2013 -y
+	choco install vcredist2015 -y
 	# choco install geforce-experience -y
 
-# Tools
+# Tools & Utilities
 	choco install 7zip.install -y
 	choco install baretail -y
 	choco install crashplan -y
@@ -43,6 +45,7 @@ $Boxstarter.AutoLogin=$true
 	choco install github -y
 	choco install glasswire -y
 	choco install heidisql -y
+	choco install mysql.workbench -y
 	choco install putty.install -y
 	choco install rdcman -y
 	choco install rdmfree -y
@@ -72,7 +75,6 @@ $Boxstarter.AutoLogin=$true
 	choco install malwarebytes -y
 	choco install markdownpad2 -y
 	choco install mp3tag -y
-	choco install mysql.workbench -y
 	choco install skype -y
 	choco install slack -y
 	choco install spotify -y
@@ -98,5 +100,6 @@ $Boxstarter.AutoLogin=$true
 	#Install WSL
 	choco install Microsoft-Windows-Subsystem-Linux -source windowsfeatures -y
 
+Enable-UAC
 Enable-MicrosoftUpdate
 Install-WindowsUpdate -acceptEula
