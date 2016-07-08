@@ -25,6 +25,7 @@ $Boxstarter.AutoLogin=$true
 	choco install chocolatey -y
 	choco install powershell -y
 
+	DISM /Online /NoRestart /Enable-Feature /FeatureName:NetFx3
 	choco install DotNet3.5 -y
 	choco install DotNet4.0 -y
 	choco install DotNet4.5 -y
