@@ -47,6 +47,7 @@ $Boxstarter.AutoLogin=$true
 	choco install github -y
 	choco install glasswire -y
 	choco install heidisql -y
+	choco install Microsoft-Hyper-V-Tools-All -source windowsfeatures -y
 	choco install mysql.workbench -y
 	choco install putty.install -y
 	choco install rdcman -y
