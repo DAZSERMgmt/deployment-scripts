@@ -25,11 +25,10 @@ $Boxstarter.AutoLogin=$true
 	choco install chocolatey -y
 	choco install powershell -y
 
-	# Dot Net 3.5
+	# Dot Net 2/3
 	choco install NetFx3 -source windowsfeatures -y
-	choco install DotNet3.5 -y
-	choco install DotNet4.0 -y
-	choco install DotNet4.5 -y
+	# Dot Net 4
+	choco install NetFx4-AdvSrvs -source windowsfeatures -y
 	choco install vcredist2005 -y
 	choco install vcredist2008 -y
 	choco install vcredist2010 -y
