@@ -15,6 +15,7 @@ $Boxstarter.AutoLogin=$true
 		$name = Read-Host "What is your computer name?"
 		Rename-Computer -NewName $name
 		echo $null >> C:\computerNamed
+		if (Test-PendingReboot) { Invoke-Reboot }
 	}
 
 # Updates & Backend
