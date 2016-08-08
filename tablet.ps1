@@ -1,9 +1,5 @@
 # START http://boxstarter.org/package/nr/url?
 
-$Boxstarter.RebootOk=$true
-$Boxstarter.NoPassword=$false
-$Boxstarter.AutoLogin=$true
-
 # Windows Stuff
 	Disable-BingSearch
 	Update-ExecutionPolicy RemoteSigned
