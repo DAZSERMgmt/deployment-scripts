@@ -10,6 +10,13 @@ $Boxstarter.AutoLogin=$true
 
 	tzutil /s "Eastern Standard Time"
 
+	# Set computer name
+	If (!(Test-Path C:\computerNamed) {
+		$name = Read-Host "What is your computer name?"
+		Rename-Computer -NewName $name
+		echo $null >> C:\computerNamed
+	}
+
 # Updates & Backend
 	choco install chocolatey -y
 	choco install powershell -y
@@ -56,6 +63,8 @@ $App.Save()
 $Mail = $Shell.CreateShortcut($env:USERPROFILE + "\Desktop\Web Mail.url")
 $Mail.TargetPath = "https://mail.dazser.com"
 $Mail.Save()
+
+Remove-Item C:\computerNamed
 
 # Windows Stuff
 Enable-MicrosoftUpdate
