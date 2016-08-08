@@ -11,7 +11,7 @@ $Boxstarter.AutoLogin=$true
 	tzutil /s "Eastern Standard Time"
 
 	# Set computer name
-	If (!(Test-Path C:\computerNamed) {
+	If (!(Test-Path C:\computerNamed)) {
 		$name = Read-Host "What is your computer name?"
 		Rename-Computer -NewName $name
 		echo $null >> C:\computerNamed
