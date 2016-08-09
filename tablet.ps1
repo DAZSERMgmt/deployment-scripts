@@ -33,8 +33,8 @@
 # Browsers
 	choco install googlechrome -y
 	# Copy master_preferences to Chrome profile
-	Copy-Item master_preferences $env:PROGRAMFILES(x86)+"\Google\Chrome\Application\"
-	Copy-Item initialbookmarks.html $env:PROGRAMFILES(x86)+"\Google\Chrome\Application\"
+	Copy-Item master_preferences ${Env:ProgramFiles(x86)}+"\Google\Chrome\Application\"
+	Copy-Item initialbookmarks.html ${Env:ProgramFiles(x86)}+"\Google\Chrome\Application\"
 
 #	# Create Shortcuts
 #	$TargetFile = "$env:SystemRoot\System32\notepad.exe"
@@ -56,10 +56,12 @@ $Shell = New-Object -ComObject ("WScript.Shell")
 
 $App = $Shell.CreateShortcut($env:USERPROFILE + "\Desktop\DAZSER Web App.url")
 $App.TargetPath = "https://www.dazser.net"
+$App.IconLocation = "shell32.dll, 13"
 $App.Save()
 
 $Mail = $Shell.CreateShortcut($env:USERPROFILE + "\Desktop\Web Mail.url")
 $Mail.TargetPath = "https://mail.dazser.com"
+$Mail.IconLocation = "shell32.dll, 42"
 $Mail.Save()
 
 Remove-Item C:\computerNamed
