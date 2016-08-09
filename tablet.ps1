@@ -33,8 +33,8 @@
 # Browsers
 	choco install googlechrome -y
 	# Copy master_preferences to Chrome profile
-	Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Sparticuz/boxstarter-scripts/master/master_preferences" -OutFile ${Env:ProgramFiles(x86)}+"\Google\Chrome\Application\master_preferences"
-	Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Sparticuz/boxstarter-scripts/master/initialbookmarks.html" -OutFile ${Env:ProgramFiles(x86)}+"\Google\Chrome\Application\initialbookmarks.html"
+	Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Sparticuz/boxstarter-scripts/master/master_preferences" -OutFile ${Env:ProgramFiles(x86)}"\Google\Chrome\Application\master_preferences"
+	Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Sparticuz/boxstarter-scripts/master/initialbookmarks.html" -OutFile ${Env:ProgramFiles(x86)}"\Google\Chrome\Application\initialbookmarks.html"
 
 #	# Create Shortcuts
 #	$TargetFile = "$env:SystemRoot\System32\notepad.exe"
