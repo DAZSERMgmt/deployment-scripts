@@ -32,8 +32,9 @@
 
 # Browsers
 	choco install googlechrome -y
-
-	Install-ChocolateyPinnedTaskBarItem "$env:localappdata\Google\Chrome\Application\chrome.exe"
+	# Copy master_preferences to Chrome profile
+	Copy-Item master_preferences $env:PROGRAMFILES(x86)+"\Google\Chrome\Application\"
+	Copy-Item initialbookmarks.html $env:PROGRAMFILES(x86)+"\Google\Chrome\Application\"
 
 #	# Create Shortcuts
 #	$TargetFile = "$env:SystemRoot\System32\notepad.exe"
