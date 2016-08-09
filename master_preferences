@@ -4,29 +4,12 @@
     "show_on_all_tabs": true
   },
   "distribution" : {
-    // All the preferences below are expected to be inside the JSON "distribution"
-    // block (as shown here). Some of them also have equivalent command line option. 
-    // If same option is specified in master preference as well as command line, 
-    // the command line value takes precedence.
-
-    // String pref that triggers silent import of bookmarks from the html file at
-    // given path.
     "import_bookmarks_from_file": "initialbookmarks.html",
     "import_bookmarks": false,
-
-    // Boolean. Register Chrome as default browser. Cmd line override present.
     "make_chrome_default": true,
-
-    // Boolean. Register Chrome as default browser for the current user.
     "make_chrome_default_for_user": true,
-
-    // Boolean. Expect to be run by an MSI installer. Cmd line override present.
     "msi": true,
-
-    // Boolean. Install Chrome to system wise location. Cmd line override present.
     "system_level": true,
-
-    // Name of the block that contains the extensions on the master preferences.
     "extensions.settings": {
       "settings": {
         "pfmgfdlgomnbgkofeojodiodmgpgmkac": {
