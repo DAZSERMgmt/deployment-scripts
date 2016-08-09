@@ -1,4 +1,4 @@
-# START http://boxstarter.org/package/nr/url?
+# START http://boxstarter.org/package/url?
 
 # Windows Stuff
 	Disable-BingSearch
@@ -33,8 +33,8 @@
 # Browsers
 	choco install googlechrome -y
 	# Copy master_preferences to Chrome profile
-	Copy-Item master_preferences ${Env:ProgramFiles(x86)}+"\Google\Chrome\Application\"
-	Copy-Item initialbookmarks.html ${Env:ProgramFiles(x86)}+"\Google\Chrome\Application\"
+	Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Sparticuz/boxstarter-scripts/master/master_preferences" -OutFile ${Env:ProgramFiles(x86)}+"\Google\Chrome\Application\master_preferences"
+	Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Sparticuz/boxstarter-scripts/master/initialbookmarks.html" -OutFile ${Env:ProgramFiles(x86)}+"\Google\Chrome\Application\initialbookmarks.html"
 
 #	# Create Shortcuts
 #	$TargetFile = "$env:SystemRoot\System32\notepad.exe"
