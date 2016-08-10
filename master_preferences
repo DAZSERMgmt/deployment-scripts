@@ -9,6 +9,6 @@
     "make_chrome_default": true,
     "make_chrome_default_for_user": true,
     "msi": true,
-    "system_level": true,
+    "system_level": true
   }
 }
