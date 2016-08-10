@@ -9,4 +9,4 @@ $jsonObject.shared_folders.dir = $env:UserProfile+"\Documents\Forms"
 
 # Write to Conf file
 $jsonFileDataToWrite = $jsonObject | ConvertTo-Json
-$jsonFileDataToWrite | Out-File $env:AppData+"\Bittorrent Sync\btsync.conf"
+$jsonFileDataToWrite | Out-File $env:AppData"\Bittorrent Sync\btsync.conf"
