@@ -86,12 +86,12 @@ $Shell = New-Object -ComObject ("WScript.Shell")
 
 $App = $Shell.CreateShortcut($env:USERPROFILE + "\Desktop\DAZSER Web App.url")
 $App.TargetPath = "https://www.dazser.net"
-$App.IconLocation = "shell32.dll, 13"
+$App.IconLocation = "$env:windir\System32\shell32.dll, 13"
 $App.Save()
 
 $Mail = $Shell.CreateShortcut($env:USERPROFILE + "\Desktop\Web Mail.url")
 $Mail.TargetPath = "https://mail.dazser.com"
-$Mail.IconLocation = "shell32.dll, 42"
+$Mail.IconLocation = "$env:windir\System32\shell32.dll, 42"
 $Mail.Save()
 
 Remove-Item C:\computerNamed
