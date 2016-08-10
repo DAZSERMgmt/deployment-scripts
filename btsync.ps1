@@ -1,5 +1,5 @@
 # Get JSON data
-$jsonFileData = Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Sparticuz/boxstarter-scripts/master/btsync.conf"
+$jsonFileData = Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Sparticuz/boxstarter-scripts/master/btsync.conf" -UseBasicParsing
 $jsonObject = $jsonFileData | ConvertFrom-Json
 
 # Set JSON settings
