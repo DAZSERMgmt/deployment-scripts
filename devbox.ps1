@@ -38,15 +38,15 @@ $Boxstarter.AutoLogin=$true
 	# choco install geforce-experience -y
 
 # Tools & Utilities
-	choco install 7zip.install -y
+	choco install 7zip -y
 	choco install baretail -y
 	choco install crashplan -y
 	choco install emet -y
-	choco install git.install -y
+	choco install git -y
 	choco install github -y
 	choco install glasswire -y
 	choco install heidisql -y
-	choco install Microsoft-Hyper-V-Tools-All -source windowsfeatures -y
+	choco install Microsoft-Hyper-V-Tools-All -source windowsfeatures -y /enablefeature /all #failed
 	choco install mysql.workbench -y
 	choco install putty.install -y
 	choco install rdcman -y
@@ -56,21 +56,21 @@ $Boxstarter.AutoLogin=$true
 	choco install wget -y
 
 # Fonts
-	choco install sourcecodepro -y
+	#choco install sourcecodepro -y	#failed
 	choco install inconsolata -y
-	choco install robotofonts -y
+	#choco install robotofonts -y	#failed
 	choco install opensans -y
 
 # Applications
 	choco install atom -y
 	choco install calibre -y
-	choco install ccleaner -y
+	choco install ccleaner -y	#rebooted?
 	choco install ccenhancer -y
 	choco install deluge -y
 	choco install dropbox -y
 	choco install greenshot -y
 	choco install googledrive -y
-	choco install handbrake.install -y
+	choco install handbrake -y
 	choco install itunes -y
 	choco install lastpass -y
 	choco install libreoffice -y
@@ -96,8 +96,9 @@ $Boxstarter.AutoLogin=$true
 	Install-ChocolateyPinnedTaskBarItem "$env:SystemRoot\system32\WindowsPowerShell\v1.0\powershell.exe"
 
 # Windows Stuff
-	#Show Powershell on Win+X instead of Command Prompt
+	#Show Powershell on Win+X instead of Command Prompt #kill explorer
 	Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name DontUsePowerShellOnWinX -Value 0
+    #taskbar preferences
 
 	#Install WSL
 	choco install Microsoft-Windows-Subsystem-Linux -source windowsfeatures -y

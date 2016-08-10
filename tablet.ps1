@@ -31,6 +31,10 @@
 	# $env:appdata+"\Bittorrent Sync\btsync.exe /config btsync.conf"
 
 	choco install followmee -y
+	# Get FollowMee settings
+	Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Sparticuz/boxstarter-scripts/master/FollowMee-Settings.xml" -OutFile ${Env:ProgramFiles(x86)}"\FollowMee\Settings.xml"
+	Start-Service FMEEService
+
 	choco install networx -y
 
 # Applications
