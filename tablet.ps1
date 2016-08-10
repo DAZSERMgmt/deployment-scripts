@@ -10,7 +10,7 @@
 	If (!(Test-Path C:\computerNamed)) {
 		$name = Read-Host "What is your computer name?"
 		Rename-Computer -NewName $name
-		echo $null >> C:\computerNamed
+		echo $name >> C:\computerNamed
 		if (Test-PendingReboot) { Invoke-Reboot }
 	}
 
@@ -21,7 +21,15 @@
 
 # Tools
 	choco install emet -y
+	
 	choco install btsync -y
+	# BTSync starts after install, so kill it.
+	Stop-Process -ProcessName btsync
+	# Next, run btsync.ps1 to generate btsync.conf
+	# Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Sparticuz/boxstarter-scripts/master/btsync.ps1" -UseBasicParsing | Invoke-Expression
+	# Run btsync
+	# $env:appdata+"\Bittorrent Sync\btsync.exe /config btsync.conf"
+
 	choco install followmee -y
 	choco install networx -y
 
