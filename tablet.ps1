@@ -40,6 +40,19 @@
 	Start-Service FMEEService
 
 	choco install networx -y
+	Stop-Process -ProcessName networx
+	# Now get the OpenSSL files
+	$file = "C:\openssl.zip"
+	Invoke-WebRequest -Uri "http://indy.fulgan.com/SSL/openssl-1.0.2a-x64_86-win64.zip" -OutFile $file
+	# Unzip the file to specified location
+	$shell_app = New-Object -Com Shell.Application 
+	$zip_file = $shell_app.namespace($file)
+	$path = $Env:ProgramFiles+"\Networx\"
+	$destination = $shell_app.namespace($path) 
+	$destination.Copyhere($zip_file.items())
+	Remove-Item $file
+	# Now get the settings database file
+	Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Sparticuz/boxstarter-scripts/master/networx.db" -OutFile $Env:ProgramFiles"\NetWorx\NetWorx.db"
 
 # Applications
 	choco install libreoffice -y
