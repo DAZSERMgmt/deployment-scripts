@@ -17,6 +17,7 @@
 # Updates & Backend
 	choco install chocolatey -y
 	choco install powershell -y
+	choco install javaruntime -y
 
 # Tools
 	choco install emet -y
