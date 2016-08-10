@@ -24,7 +24,7 @@
 	# Configure EMET
 	Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Sparticuz/boxstarter-scripts/master/EMET-Settings.xml" -OutFile ${Env:ProgramFiles(x86)}"\EMET 5.5\MyEMETSettings.xml"
 	$path = ${Env:ProgramFiles(x86)}+"\EMET 5.5"
-	& $path\EMET_Conf.exe --import $path\MyEMETSettings.xml --force
+	& $path\EMET_Conf.exe --import $path\MyEMETSettings.xml
 
 	choco install btsync -y
 	# BTSync starts after install, so kill it.
