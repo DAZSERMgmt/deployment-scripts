@@ -21,7 +21,11 @@
 
 # Tools
 	choco install emet -y
-	
+	# Configure EMET
+	Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Sparticuz/boxstarter-scripts/master/EMET-Settings.xml" -OutFile ${Env:ProgramFiles(x86)}"\EMET 5.5\MyEMETSettings.xml"
+	$path = ${Env:ProgramFiles(x86)}+"\EMET 5.5"
+	& $path\EMET_Conf.exe --import $path\MyEMETSettings.xml --force
+
 	choco install btsync -y
 	# BTSync starts after install, so kill it.
 	Stop-Process -ProcessName btsync
@@ -31,7 +35,7 @@
 	# $env:appdata+"\Bittorrent Sync\btsync.exe /config btsync.conf"
 
 	choco install followmee -y
-	# Get FollowMee settings
+	# Get FollowMee settings & Start the service
 	Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Sparticuz/boxstarter-scripts/master/FollowMee-Settings.xml" -OutFile ${Env:ProgramFiles(x86)}"\FollowMee\Settings.xml"
 	Start-Service FMEEService
 
