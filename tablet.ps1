@@ -43,7 +43,7 @@
 	Stop-Process -ProcessName networx
 	# Now get the OpenSSL files
 	$file = "C:\openssl.zip"
-	Invoke-WebRequest -Uri "http://indy.fulgan.com/SSL/openssl-1.0.2a-x64_86-win64.zip" -OutFile $file
+	Invoke-WebRequest -Uri "https://indy.fulgan.com/SSL/openssl-1.0.2h-x64_86-win64.zip" -OutFile $file
 	# Unzip the file to specified location
 	$shell_app = New-Object -Com Shell.Application 
 	$zip_file = $shell_app.namespace($file)
