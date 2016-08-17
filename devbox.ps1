@@ -91,13 +91,16 @@ $Boxstarter.AutoLogin=$true
 	choco install googlechrome.canary -y
 	choco install googlechrome.dev -y
 
-	Install-ChocolateyPinnedTaskBarItem "$env:localappdata\Google\Chrome\Application\chrome.exe"
 	Install-ChocolateyPinnedTaskBarItem "$env:windir\explorer.exe"
 	Install-ChocolateyPinnedTaskBarItem "$env:SystemRoot\system32\WindowsPowerShell\v1.0\powershell.exe"
 
 # Windows Stuff
 	#Show Powershell on Win+X instead of Command Prompt #kill explorer
 	Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name DontUsePowerShellOnWinX -Value 0
+	#File Explorer preferences
+	Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name NavPaneExpandToCurrentFolder -Value 1
+	Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name NavPaneShowAllFolders -Value 1
+	Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name LaunchTo -Value 1
     #taskbar preferences
 
 	#Install WSL
