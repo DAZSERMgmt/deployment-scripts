@@ -46,7 +46,7 @@ $Boxstarter.AutoLogin=$true
 	choco install github -y
 	choco install glasswire -y
 	choco install heidisql -y
-	choco install Microsoft-Hyper-V-Tools-All -source windowsfeatures -y /enablefeature /all #failed
+	#choco install Microsoft-Hyper-V-Tools-All -source windowsfeatures -y /enablefeature /all #failed
 	choco install mysql.workbench -y
 	choco install putty.install -y
 	choco install rdcman -y
@@ -62,7 +62,7 @@ $Boxstarter.AutoLogin=$true
 	choco install opensans -y
 
 # Applications
-	choco install atom -y
+	#choco install atom -y
 	choco install calibre -y
 	choco install ccleaner -y	#rebooted?
 	choco install ccenhancer -y
@@ -80,10 +80,11 @@ $Boxstarter.AutoLogin=$true
 	choco install skype -y
 	choco install slack -y
 	choco install spotify -y
-	choco install sublimetext3 -y
-	choco install sublimetext3.packagecontrol -y
+	#choco install sublimetext3 -y
+	#choco install sublimetext3.packagecontrol -y
 	choco install sumatrapdf -y
 	choco install treesizefree -y
+	choco install visualstudiocode -y
 	choco install vlc -y
 
 # Browsers
