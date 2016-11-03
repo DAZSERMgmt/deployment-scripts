@@ -35,7 +35,6 @@ $Boxstarter.AutoLogin=$true
 	choco install vcredist2012 -y
 	choco install vcredist2013 -y
 	choco install vcredist2015 -y
-	# choco install geforce-experience -y
 
 # Tools & Utilities
 	choco install 7zip -y
@@ -46,7 +45,7 @@ $Boxstarter.AutoLogin=$true
 	choco install github -y
 	choco install glasswire -y
 	choco install heidisql -y
-	choco install Microsoft-Hyper-V-Tools-All -source windowsfeatures -y /enablefeature /all #failed
+	# choco install Microsoft-Hyper-V-Tools-All -source windowsfeatures -y /enablefeature /all #failed
 	choco install mysql.workbench -y
 	choco install putty.install -y
 	choco install rdcman -y
@@ -80,10 +79,11 @@ $Boxstarter.AutoLogin=$true
 	choco install skype -y
 	choco install slack -y
 	choco install spotify -y
-	choco install sublimetext3 -y
-	choco install sublimetext3.packagecontrol -y
+	#choco install sublimetext3 -y
+	#choco install sublimetext3.packagecontrol -y
 	choco install sumatrapdf -y
 	choco install treesizefree -y
+	choco install visualstudiocode -y
 	choco install vlc -y
 
 # Browsers
@@ -101,10 +101,13 @@ $Boxstarter.AutoLogin=$true
 	Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name NavPaneExpandToCurrentFolder -Value 1
 	Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name NavPaneShowAllFolders -Value 1
 	Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name LaunchTo -Value 1
+    Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name MMTaskbarMode -Value 2
     #taskbar preferences
 
 	#Install WSL
 	choco install Microsoft-Windows-Subsystem-Linux -source windowsfeatures -y
+
+	
 
 Enable-UAC
 Enable-MicrosoftUpdate
