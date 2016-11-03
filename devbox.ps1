@@ -61,7 +61,7 @@ $Boxstarter.AutoLogin=$true
 	choco install opensans -y
 
 # Applications
-	choco install atom -y
+	#choco install atom -y
 	choco install calibre -y
 	choco install ccleaner -y	#rebooted?
 	choco install ccenhancer -y
