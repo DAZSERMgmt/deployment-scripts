@@ -20,11 +20,11 @@
 	choco install javaruntime -y
 
 # Tools
-	choco install emet -y
+	#choco install emet -y
 	# Configure EMET
-	Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Sparticuz/boxstarter-scripts/master/EMET-Settings.xml" -OutFile ${Env:ProgramFiles(x86)}"\EMET 5.5\MyEMETSettings.xml"
-	$path = ${Env:ProgramFiles(x86)}+"\EMET 5.5"
-	& $path\EMET_Conf.exe --import $path\MyEMETSettings.xml
+	#Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Sparticuz/boxstarter-scripts/master/EMET-Settings.xml" -OutFile ${Env:ProgramFiles(x86)}"\EMET 5.5\MyEMETSettings.xml"
+	#$path = ${Env:ProgramFiles(x86)}+"\EMET 5.5"
+	#& $path\EMET_Conf.exe --import $path\MyEMETSettings.xml
 
 	choco install btsync -y
 	# BTSync starts after install, so kill it.
@@ -34,16 +34,16 @@
 	# Run btsync
 	# $env:appdata+"\Bittorrent Sync\btsync.exe /config btsync.conf"
 
-	choco install followmee -y
+	#choco install followmee -y
 	# Get FollowMee settings & Start the service
-	Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Sparticuz/boxstarter-scripts/master/FollowMee-Settings.xml" -OutFile ${Env:ProgramFiles(x86)}"\FollowMee\Settings.xml"
-	Start-Service FMEEService
+	#Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Sparticuz/boxstarter-scripts/master/FollowMee-Settings.xml" -OutFile ${Env:ProgramFiles(x86)}"\FollowMee\Settings.xml"
+	#Start-Service FMEEService
 
 	choco install networx -y
 	Stop-Process -ProcessName networx
 	# Now get the OpenSSL files
 	$file = "C:\openssl.zip"
-	Invoke-WebRequest -Uri "https://indy.fulgan.com/SSL/openssl-1.0.2h-x64_86-win64.zip" -OutFile $file
+	Invoke-WebRequest -Uri "https://indy.fulgan.com/SSL/openssl-1.0.2j-x64_86-win64.zip" -OutFile $file
 	# Unzip the file to specified location
 	$shell_app = New-Object -Com Shell.Application 
 	$zip_file = $shell_app.namespace($file)
@@ -94,8 +94,8 @@ $Mail.TargetPath = "https://mail.dazser.com"
 $Mail.IconLocation = "$env:windir\System32\shell32.dll, 42"
 $Mail.Save()
 
-Remove-Item C:\computerNamed
-
 # Windows Stuff
 Enable-MicrosoftUpdate
 Install-WindowsUpdate -acceptEula
+
+Remove-Item C:\computerNamed
