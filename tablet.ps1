@@ -101,7 +101,12 @@ $Mail.IconLocation = "$env:windir\System32\shell32.dll, 42"
 $Mail.Save()
 
 # Windows Stuff
-Enable-MicrosoftUpdate
-Install-WindowsUpdate -acceptEula
+	#Show Powershell on Win+X instead of Command Prompt #kill explorer
+	Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name DontUsePowerShellOnWinX -Value 0
+	#File Explorer preferences
+	Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name NavPaneExpandToCurrentFolder -Value 1
+	Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name NavPaneShowAllFolders -Value 1
+	Enable-MicrosoftUpdate
+	Install-WindowsUpdate -acceptEula
 
 Remove-Item C:\computerNamed
