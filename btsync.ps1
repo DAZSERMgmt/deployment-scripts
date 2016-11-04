@@ -9,4 +9,4 @@ $jsonObject.shared_folders[0].dir = $env:UserProfile+"\Documents\Forms"
 
 # Write to Conf file
 $jsonFileDataToWrite = $jsonObject | ConvertTo-Json
-$jsonFileDataToWrite | Out-File $env:AppData"\Bittorrent Sync\btsync.conf" -Encoding ascii
+$jsonFileDataToWrite | Out-File $env:AppData"\Resilio Sync\btsync.conf" -Encoding ascii
