@@ -2,8 +2,12 @@
 
 # Windows Stuff
 	Disable-BingSearch
-	Update-ExecutionPolicy RemoteSigned
-
+	
+	$policy = Get-ExecutionPolicy
+	if (!($policy -eq "RemoteSigned")) {
+		Update-ExecutionPolicy RemoteSigned
+	}
+	
 	tzutil /s "Eastern Standard Time"
 
 	# Set computer name
