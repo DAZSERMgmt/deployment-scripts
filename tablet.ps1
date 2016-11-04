@@ -1,8 +1,8 @@
 # Start a new Tablet
 
 function Test-PendingReboot {
-  If (Test-Path C:\.reboot) {
-    Remove-Item C:\.reboot
+  If (Test-Path C:\rebootNeeded) {
+    Remove-Item C:\rebootNeeded
     return $true
   }
   return $false
@@ -34,11 +34,11 @@ function Invoke-Reboot {
   iwr https://chocolatey.org/install.ps1 -UseBasicParsing | iex
 
   # Set computer name
-  If (!(Test-Path C:\.computerNamed)) {
+  If (!(Test-Path C:\computerNamed)) {
     $name = Read-Host "What is your computer name?"
     Rename-Computer -NewName $name
-    echo $name >> C:\.computerNamed
-    echo "" >> C:\.reboot
+    echo $name >> C:\computerNamed
+    echo "" >> C:\rebootNeeded
     if (Test-PendingReboot) { Invoke-Reboot }
   }
 
