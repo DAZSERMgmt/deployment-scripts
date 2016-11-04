@@ -8,7 +8,9 @@
 		Update-ExecutionPolicy RemoteSigned
 	}
 	
+	# Update the timezone and time
 	tzutil /s "Eastern Standard Time"
+	w32tm /resync /force
 
 	# Set computer name
 	If (!(Test-Path C:\computerNamed)) {
