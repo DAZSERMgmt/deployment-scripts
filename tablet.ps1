@@ -29,9 +29,6 @@ function Invoke-Reboot {
 
   Write-Output "Setting Local Policy to RemoteSigned"
   Set-ExecutionPolicy RemoteSigned -Scope LocalMachine
-  
-  # Install chocolatey
-  iwr https://chocolatey.org/install.ps1 -UseBasicParsing | iex
 
   # Set computer name
   If (!(Test-Path C:\computerNamed)) {
@@ -41,6 +38,11 @@ function Invoke-Reboot {
     echo "" >> C:\rebootNeeded
     if (Test-PendingReboot) { Invoke-Reboot }
   }
+  
+  # Install chocolatey
+  iwr https://chocolatey.org/install.ps1 -UseBasicParsing | iex
+
+  RefreshEnv.cmd
 
   # Add my Choco source
   choco source add -s="https://www.myget.org/F/dazser/api/v2" -n=dazser
@@ -56,26 +58,18 @@ function Invoke-Reboot {
   #$path = ${Env:ProgramFiles(x86)}+"\EMET 5.5"
   #& $path\EMET_Conf.exe --import $path\MyEMETSettings.xml
 
-  choco install btsync -y
-  # BTSync starts after install, so kill it.
-  Stop-Process -ProcessName btsync
+  choco install resilio-sync --source=dazser -y
   # Next, run btsync.ps1 to generate btsync.conf
-  # Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Sparticuz/boxstarter-scripts/master/btsync.ps1" -UseBasicParsing | Invoke-Expression
+  Invoke-WebRequest "https://raw.githubusercontent.com/Sparticuz/boxstarter-scripts/master/btsync.ps1" -UseBasicParsing | Invoke-Expression
   # Run btsync
-  # $env:appdata+"\Bittorrent Sync\btsync.exe /config btsync.conf"
-
-  #choco install followmee -y
-  # Get FollowMee settings & Start the service
-  #Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Sparticuz/boxstarter-scripts/master/FollowMee-Settings.xml" -OutFile ${Env:ProgramFiles(x86)}"\FollowMee\Settings.xml"
-  #Start-Service FMEEService
+  $env:appdata+"\Resilio Sync\btsync.exe /config btsync.conf"
 
   choco install networx -y
-  try {
-    Write-Output "Stopping networx"
-    Stop-Process -ProcessName networx
-  } catch {}
+  Write-Output "Stopping networx"
+  Stop-Process -ProcessName networx
   # Now get the OpenSSL files
   $file = "$env:TEMP\openssl.zip"
+  Write-Output "Grabbing OpenSSL"
   Invoke-WebRequest -Uri "https://indy.fulgan.com/SSL/openssl-1.0.2j-x64_86-win64.zip" -OutFile $file
   # Unzip the file to specified location
   $shell_app = New-Object -Com Shell.Application 
@@ -83,9 +77,10 @@ function Invoke-Reboot {
   $path = $Env:ProgramFiles+"\Networx\"
   $destination = $shell_app.namespace($path) 
   $destination.Copyhere($zip_file.items())
+  Write-Output "OpenSSL Installed"
   Remove-Item $file
   # Now get the settings database file
-  Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Sparticuz/boxstarter-scripts/master/networx.db" -OutFile $Env:ProgramFiles"\NetWorx\NetWorx.db"
+  Invoke-WebRequest "https://raw.githubusercontent.com/Sparticuz/boxstarter-scripts/master/networx.db" -OutFile $Env:ProgramFiles"\NetWorx\NetWorx.db"
 
 # Applications
   choco install libreoffice -y
@@ -103,12 +98,12 @@ $Shell = New-Object -ComObject ("WScript.Shell")
 
 $App = $Shell.CreateShortcut($env:USERPROFILE + "\Desktop\DAZSER Web App.url")
 $App.TargetPath = "https://www.dazser.net"
-$App.IconLocation = "$env:windir\System32\shell32.dll, 13"
+#$App.IconLocation = "$env:windir\System32\shell32.dll, 13"
 $App.Save()
 
 $Mail = $Shell.CreateShortcut($env:USERPROFILE + "\Desktop\Web Mail.url")
 $Mail.TargetPath = "https://mail.dazser.com"
-$Mail.IconLocation = "$env:windir\System32\shell32.dll, 42"
+#$Mail.IconLocation = "$env:windir\System32\shell32.dll, 42"
 $Mail.Save()
 
 # Windows Stuff
@@ -117,5 +112,4 @@ $Mail.Save()
   #File Explorer preferences
   Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name NavPaneExpandToCurrentFolder -Value 1
   Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name NavPaneShowAllFolders -Value 1
-
-Remove-Item C:\computerNamed
+  
