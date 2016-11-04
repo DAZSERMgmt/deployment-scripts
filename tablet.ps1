@@ -10,9 +10,7 @@ function Test-PendingReboot {
     if(($status -ne $null) -and $status.RebootPending){
       return $true
     }
-  } catch {
-    Write-Error "PendingReboot Test failed"
-  }
+  } catch {}
   return $false
 }
 
@@ -27,19 +25,16 @@ function Invoke-Reboot {
   Restart-Computer -Force
 }
 
-
 # Windows Stuff
   # Update the timezone and time
   $time = tzutil /g
   if (!($time -eq "Eastern Standard Time")) {
+    Write-Output "Setting Time Zone to EST"
     tzutil /s "Eastern Standard Time"
   }
 
-  $policy = Get-ExecutionPolicy
-  if (!($policy -eq "RemoteSigned")) {
-      Write-Output "Local Policy is set to $policy, setting to RemoteSigned"
-      Set-ExecutionPolicy RemoteSigned -Scope LocalMachine
-  }
+  Write-Output "Setting Local Policy to RemoteSigned"
+  Set-ExecutionPolicy RemoteSigned -Scope LocalMachine
   
   # Install chocolatey
   iwr https://chocolatey.org/install.ps1 -UseBasicParsing | iex
@@ -52,10 +47,12 @@ function Invoke-Reboot {
     if (Test-PendingReboot) { Invoke-Reboot }
   }
 
+  # Add my Choco source
+  choco source add "https://www.myget.org/F/dazser/api/v2" -n=dazser
+
 # Updates & Backend
-  choco install chocolatey --source=chocolatey -y
   choco install powershell --source=chocolatey -y
-  choco install javaruntime -y
+  choco install javaruntime --source=chocolatey -y
 
 # Tools
   #choco install emet -y
@@ -78,9 +75,12 @@ function Invoke-Reboot {
   #Start-Service FMEEService
 
   choco install networx -y
-  Stop-Process -ProcessName networx
+  try {
+    Write-Output "Stopping networx"
+    Stop-Process -ProcessName networx
+  } catch {}
   # Now get the OpenSSL files
-  $file = "C:\openssl.zip"
+  $file = "$env:TEMP\openssl.zip"
   Invoke-WebRequest -Uri "https://indy.fulgan.com/SSL/openssl-1.0.2j-x64_86-win64.zip" -OutFile $file
   # Unzip the file to specified location
   $shell_app = New-Object -Com Shell.Application 
@@ -103,22 +103,6 @@ function Invoke-Reboot {
   # Copy master_preferences to Chrome profile
   Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Sparticuz/boxstarter-scripts/master/master_preferences" -OutFile ${Env:ProgramFiles(x86)}"\Google\Chrome\Application\master_preferences"
   Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Sparticuz/boxstarter-scripts/master/initialbookmarks.html" -OutFile ${Env:ProgramFiles(x86)}"\Google\Chrome\Application\initialbookmarks.html"
-
-#	# Create Shortcuts
-#	$TargetFile = "$env:SystemRoot\System32\notepad.exe"
-#	$ShortcutFile = "$env:Public\Desktop\Notepad.lnk"
-#	$WScriptShell = New-Object -ComObject WScript.Shell
-#	$Shortcut = $WScriptShell.CreateShortcut($ShortcutFile)
-#	$Shortcut.TargetPath = $TargetFile
-#	$Shortcut.Save()
-
-#Install-ChocolateyShortcut `
- # -ShortcutFilePath "C:\notepad.lnk" `
-  #-TargetPath "C:\Windows\System32\notepad.exe" `
-#  -WorkDirectory "C:\" `
- # -Arguments "C:\test.txt" `
-  #-IconLocation "C:\test.ico" `
-#  -Description "This is the description"
 
 $Shell = New-Object -ComObject ("WScript.Shell")
 
