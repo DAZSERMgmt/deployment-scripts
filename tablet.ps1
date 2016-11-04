@@ -1,16 +1,10 @@
 # Start a new Tablet
 
 function Test-PendingReboot {
-  if (Get-ChildItem "HKLM:\Software\Microsoft\Windows\CurrentVersion\Component Based Servicing\RebootPending" -EA Ignore) { return $true }
-  if (Get-Item "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update\RebootRequired" -EA Ignore) { return $true }
-  if (Get-ItemProperty "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager" -Name PendingFileRenameOperations -EA Ignore) { return $true }
-  try { 
-    $util = [wmiclass]"\\.\root\ccm\clientsdk:CCM_ClientUtilities"
-    $status = $util.DetermineIfRebootPending()
-    if(($status -ne $null) -and $status.RebootPending){
-      return $true
-    }
-  } catch {}
+  If (Test-Path C:\.reboot) {
+    Remove-Item C:\.reboot
+    return $true
+  }
   return $false
 }
 
@@ -40,15 +34,16 @@ function Invoke-Reboot {
   iwr https://chocolatey.org/install.ps1 -UseBasicParsing | iex
 
   # Set computer name
-  If (!(Test-Path C:\computerNamed)) {
+  If (!(Test-Path C:\.computerNamed)) {
     $name = Read-Host "What is your computer name?"
     Rename-Computer -NewName $name
-    echo $name >> C:\computerNamed
+    echo $name >> C:\.computerNamed
+    echo "" >> C:\.reboot
     if (Test-PendingReboot) { Invoke-Reboot }
   }
 
   # Add my Choco source
-  choco source add "https://www.myget.org/F/dazser/api/v2" -n=dazser
+  choco source add -s="https://www.myget.org/F/dazser/api/v2" -n=dazser
 
 # Updates & Backend
   choco install powershell --source=chocolatey -y
