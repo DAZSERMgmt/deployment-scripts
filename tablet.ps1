@@ -21,8 +21,8 @@
 	}
 
 # Updates & Backend
-	choco install chocolatey -y
-	choco install powershell -y
+	choco install chocolatey --source=chocolatey -y
+	choco install powershell --source=chocolatey -y
 	choco install javaruntime -y
 
 # Tools
