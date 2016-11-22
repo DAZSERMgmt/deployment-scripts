@@ -30,7 +30,7 @@ function Invoke-Reboot {
   Write-Output "Setting Local Policy to RemoteSigned"
   Set-ExecutionPolicy RemoteSigned -Scope LocalMachine
 
-  # Set computer name
+# Set computer name
   If (!(Test-Path C:\computerNamed)) {
     $name = Read-Host "What is your computer name?"
     Rename-Computer -NewName $name
@@ -51,7 +51,7 @@ function Invoke-Reboot {
 
   RefreshEnv.cmd
 
-  # Add my Choco source
+# Add my Choco source
   choco source add -s="https://www.myget.org/F/dazser/api/v2" -n=dazser
 
 # Updates & Backend
@@ -101,17 +101,17 @@ function Invoke-Reboot {
   Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Sparticuz/boxstarter-scripts/master/master_preferences" -OutFile ${Env:ProgramFiles(x86)}"\Google\Chrome\Application\master_preferences"
   Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Sparticuz/boxstarter-scripts/master/initialbookmarks.html" -OutFile ${Env:ProgramFiles(x86)}"\Google\Chrome\Application\initialbookmarks.html"
 
-$Shell = New-Object -ComObject ("WScript.Shell")
+  $Shell = New-Object -ComObject ("WScript.Shell")
 
-$App = $Shell.CreateShortcut($env:USERPROFILE + "\Desktop\DAZSER Web App.url")
-$App.TargetPath = "https://www.dazser.net"
-#$App.IconLocation = "$env:windir\System32\shell32.dll, 13"
-$App.Save()
+  $App = $Shell.CreateShortcut($env:USERPROFILE + "\Desktop\DAZSER Web App.url")
+  $App.TargetPath = "https://www.dazser.net"
+  #$App.IconLocation = "$env:windir\System32\shell32.dll, 13"
+  $App.Save()
 
-$Mail = $Shell.CreateShortcut($env:USERPROFILE + "\Desktop\Web Mail.url")
-$Mail.TargetPath = "https://mail.dazser.com"
-#$Mail.IconLocation = "$env:windir\System32\shell32.dll, 42"
-$Mail.Save()
+  $Mail = $Shell.CreateShortcut($env:USERPROFILE + "\Desktop\Web Mail.url")
+  $Mail.TargetPath = "https://mail.dazser.com"
+  #$Mail.IconLocation = "$env:windir\System32\shell32.dll, 42"
+  $Mail.Save()
 
 # Windows Stuff
   #Show Powershell on Win+X instead of Command Prompt #kill explorer
