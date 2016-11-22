@@ -13,7 +13,7 @@ function Invoke-Reboot {
   Write-Output "Writing Restart file"
   $startup = "$env:appdata\Microsoft\Windows\Start Menu\Programs\Startup"
   Invoke-WebRequest https://raw.githubusercontent.com/Sparticuz/boxstarter-scripts/master/install.ps1 -OutFile $env:USERPROFILE\Desktop\install.ps1
-  $restartScript = "powershell.exe -File '$env:USERPROFILE\Desktop\install.ps1'"
+  $restartScript = 'powershell.exe -File "$env:USERPROFILE\Desktop\install.ps1"'
   New-Item "$startup\post-restart.bat" -type file -force -value $restartScript | Out-Null
 
   Restart-Computer -Force
