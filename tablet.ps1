@@ -119,4 +119,8 @@ function Invoke-Reboot {
   #File Explorer preferences
   Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name NavPaneExpandToCurrentFolder -Value 1
   Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name NavPaneShowAllFolders -Value 1
-  
+
+# Set up recurring powershell script
+  $action = New-ScheduledTaskAction -Execute 'powershell.exe' -Argument '-NoProfile -WindowStyle Hidden -File "${env:userprofile}\Documents\Forms\.admin\weekly.ps1"'
+  $trigger = New-ScheduledTaskTrigger -Weekly -DaysOfWeek Sunday -At 12pm
+  Register-ScheduledTask DAZSERSchedTask -Action $action -Trigger $trigger
