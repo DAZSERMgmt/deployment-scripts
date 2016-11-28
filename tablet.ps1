@@ -44,7 +44,7 @@ function Invoke-Reboot {
   Write-Output "Installing K9 Web Filter"
   Write-Output "Don't reboot after install"
   iwr http://download.k9webprotection.com/k9-webprotection.exe -UseBasicParsing -OutFile $env:TEMP\k9.exe
-  .\$env:TEMP\k9.exe
+  Start-Process -FilePath "$env:TEMP\k9.exe"
 
 # Install chocolatey
   iwr https://chocolatey.org/install.ps1 -UseBasicParsing | iex
