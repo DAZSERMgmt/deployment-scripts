@@ -56,7 +56,7 @@ function Invoke-Reboot {
 
 # Updates & Backend
   choco install powershell --source=chocolatey -y
-  choco install javaruntime --source=chocolatey -y
+  #choco install javaruntime --source=chocolatey -y
 
 # Tools
   #choco install emet -y
