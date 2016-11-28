@@ -71,7 +71,7 @@ function Invoke-Reboot {
   # Run btsync
   $env:appdata+"\Resilio Sync\btsync.exe /config btsync.conf"
 
-  choco install networx -y
+  choco install networx --version=5.5.5.20161128 -y
   Write-Output "Stopping networx"
   Stop-Process -ProcessName networx
   # Now get the OpenSSL files
