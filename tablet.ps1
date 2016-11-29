@@ -73,7 +73,17 @@ function Invoke-Reboot {
 
   choco install networx --version=5.5.5.20161128 -y
   Write-Output "Stopping networx"
-  Stop-Process -ProcessName networx
+  $proc = Get-Process networx -ErrorAction SilentlyContinue
+  if ($proc) {
+    # try gracefully first
+    $proc.CloseMainWindow()
+    # kill after five seconds
+    Sleep 5
+    if (!$proc.HasExited) {
+      $proc | Stop-Process -Force
+    }
+  }
+  Remove-Variable proc
   # Now get the OpenSSL files
   $file = "$env:TEMP\openssl.zip"
   Write-Output "Grabbing OpenSSL"
