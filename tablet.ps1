@@ -142,4 +142,4 @@ function Invoke-Reboot {
 
   # Set up the task, and register it
   $task = New-ScheduledTask -Action $taskAction -Principal $taskUserPrincipal -Trigger $taskTrigger -Settings $taskSettings
-  Register-ScheduledTask -TaskName 'Run a Choco Upgrade All on Sundays' -InputObject $task -Force
+  Register-ScheduledTask -TaskName 'ChocoUpgrade' -InputObject $task -Force
