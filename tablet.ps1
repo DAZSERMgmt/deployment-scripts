@@ -131,6 +131,15 @@ function Invoke-Reboot {
   Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name NavPaneShowAllFolders -Value 1
 
 # Set up recurring powershell script
-  $action = New-ScheduledTaskAction -Execute 'powershell.exe' -Argument '-NoProfile -WindowStyle Hidden -File "${env:userprofile}\Documents\Forms\.admin\weekly.ps1"'
-  $trigger = New-ScheduledTaskTrigger -Weekly -DaysOfWeek Sunday -At 12pm
-  Register-ScheduledTask DAZSERSchedTask -Action $action -Trigger $trigger
+  mofcomp C:\Windows\System32\wbem\SchedProv.mof
+  $chocoCmd = Get-Command -Name 'choco' -ErrorAction SilentlyContinue -WarningAction SilentlyContinue | Select-Object -ExpandProperty Source
+
+  # Settings for the scheduled task
+  $taskAction = New-ScheduledTaskAction –Execute $chocoCmd -Argument 'upgrade all -y'
+  $taskTrigger = New-ScheduledTaskTrigger -Weekly -DaysOfWeek Sunday -At 12pm
+  $taskUserPrincipal = New-ScheduledTaskPrincipal -UserId 'SYSTEM'
+  $taskSettings = New-ScheduledTaskSettingsSet -Compatibility Win8
+
+  # Set up the task, and register it
+  $task = New-ScheduledTask -Action $taskAction -Principal $taskUserPrincipal -Trigger $taskTrigger -Settings $taskSettings
+  Register-ScheduledTask -TaskName 'Run a Choco Upgrade All on Sundays' -InputObject $task -Force
