@@ -100,10 +100,10 @@ function Invoke-Reboot {
   Invoke-WebRequest "https://raw.githubusercontent.com/Sparticuz/boxstarter-scripts/master/networx.db" -OutFile $Env:ProgramFiles"\NetWorx\NetWorx.db"
 
 # Applications
-  choco install libreoffice -y
-  choco install skype -y
-  choco install slack -y
-  choco install zoom -y
+  #choco install libreoffice -y
+  #choco install skype -y
+  #choco install slack -y
+  #choco install zoom -y
 
 # Browsers
   choco install googlechrome -y
