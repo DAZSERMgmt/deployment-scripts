@@ -55,7 +55,7 @@ function Invoke-Reboot {
   choco source add -s="https://www.myget.org/F/dazser/api/v2" -n=dazser
 
 # Updates & Backend
-  choco install powershell --source=chocolatey -y
+  #choco install powershell --source=chocolatey -y
   #choco install javaruntime --source=chocolatey -y
 
 # Tools
