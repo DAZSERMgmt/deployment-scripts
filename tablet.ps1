@@ -130,16 +130,4 @@ function Invoke-Reboot {
   Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name NavPaneExpandToCurrentFolder -Value 1
   Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name NavPaneShowAllFolders -Value 1
 
-# Set up recurring powershell script
-  mofcomp C:\Windows\System32\wbem\SchedProv.mof
-  $chocoCmd = Get-Command -Name "choco" -ErrorAction SilentlyContinue -WarningAction SilentlyContinue | Select-Object -ExpandProperty Source
-
-  # Settings for the scheduled task
-  $taskAction = New-ScheduledTaskAction –Execute $chocoCmd -Argument "upgrade all -y"
-#  $taskTrigger = New-ScheduledTaskTrigger -Weekly -DaysOfWeek Sunday -At 12pm
-#  $taskUserPrincipal = New-ScheduledTaskPrincipal -UserId "SYSTEM"
-#  $taskSettings = New-ScheduledTaskSettingsSet -Compatibility Win8
-
-  # Set up the task, and register it
-#  $task = New-ScheduledTask -Action $taskAction -Principal $taskUserPrincipal -Trigger $taskTrigger -Settings $taskSettings
-#  Register-ScheduledTask -TaskName "ChocoUpgrade" -InputObject $task -Force
+  Invoke-WebRequest "https://raw.githubusercontent.com/Sparticuz/boxstarter-scripts/master/btsync.ps1" -UseBasicParsing | Invoke-Expression
