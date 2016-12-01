@@ -1,7 +1,5 @@
 # Start a new Tablet
 
-try {
-
 function Test-PendingReboot {
   If (Test-Path C:\rebootNeeded) {
     Remove-Item C:\rebootNeeded
@@ -149,9 +147,4 @@ function Invoke-Reboot {
   # Finally, set the desktop wallpaper
   Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Sparticuz/boxstarter-scripts/master/bg.jpg" -OutFile $env:USERPROFILE\Documents\bg.jpg
   Set-ItemProperty -path 'HKCU:\Control Panel\Desktop\' -name wallpaper -value $env:USERPROFILE\Documents\bg.jpg
-  rundll32.exe user32.dll, UpdatePerUserSystemParameters
-
-} catch {
-  Write-Error $_.Exception.ToString()
-  Read-Host -Prompt "The above error occurred. Press Enter to exit."
-}
+  #rundll32.exe user32.dll, UpdatePerUserSystemParameters
