@@ -131,8 +131,8 @@ function Invoke-Reboot {
   Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name NavPaneShowAllFolders -Value 1
 
 # Set up recurring powershell script
-#  mofcomp C:\Windows\System32\wbem\SchedProv.mof
-#  $chocoCmd = Get-Command -Name "choco" -ErrorAction SilentlyContinue -WarningAction SilentlyContinue | Select-Object -ExpandProperty Source
+  mofcomp C:\Windows\System32\wbem\SchedProv.mof
+  $chocoCmd = Get-Command -Name "choco" -ErrorAction SilentlyContinue -WarningAction SilentlyContinue | Select-Object -ExpandProperty Source
 
   # Settings for the scheduled task
 #  $taskAction = New-ScheduledTaskAction –Execute $chocoCmd -Argument "upgrade all -y"
