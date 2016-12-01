@@ -146,5 +146,5 @@ function Invoke-Reboot {
 
   # Finally, set the desktop wallpaper
   Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Sparticuz/boxstarter-scripts/master/bg.jpg" -OutFile $env:USERPROFILE"\Documents\bg.jpg"
-  Set-ItemProperty -Path "HKCU:\Control Panel\Desktop\" -Name Wallpaper -Value $env:USERPROFILE\Documents\bg.jpg
+  Set-ItemProperty -Path "HKCU:\Control Panel\Desktop\" -Name Wallpaper -Value $env:USERPROFILE"\Documents\bg.jpg"
   #rundll32.exe user32.dll, UpdatePerUserSystemParameters
