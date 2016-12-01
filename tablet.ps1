@@ -69,7 +69,7 @@ function Invoke-Reboot {
   # Next, run btsync.ps1 to generate btsync.conf
   Invoke-WebRequest "https://raw.githubusercontent.com/Sparticuz/boxstarter-scripts/master/btsync.ps1" -UseBasicParsing | Invoke-Expression
   # Run btsync
-  $env:appdata+"\Resilio Sync\btsync.exe /config btsync.conf"
+  & $env:appdata+"\Resilio Sync\btsync.exe /config btsync.conf"
 
   choco install networx --version=5.5.5.20161128 -y
   Write-Output "Stopping networx"
