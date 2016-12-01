@@ -135,7 +135,7 @@ function Invoke-Reboot {
   $chocoCmd = Get-Command -Name "choco" -ErrorAction SilentlyContinue -WarningAction SilentlyContinue | Select-Object -ExpandProperty Source
 
   # Settings for the scheduled task
-#  $taskAction = New-ScheduledTaskAction –Execute $chocoCmd -Argument "upgrade all -y"
+  $taskAction = New-ScheduledTaskAction –Execute $chocoCmd -Argument "upgrade all -y"
 #  $taskTrigger = New-ScheduledTaskTrigger -Weekly -DaysOfWeek Sunday -At 12pm
 #  $taskUserPrincipal = New-ScheduledTaskPrincipal -UserId "SYSTEM"
 #  $taskSettings = New-ScheduledTaskSettingsSet -Compatibility Win8
