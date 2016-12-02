@@ -132,4 +132,4 @@ function Invoke-Reboot {
   Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name NavPaneExpandToCurrentFolder -Value 1
   Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name NavPaneShowAllFolders -Value 1
 
-  Invoke-WebRequest "https://raw.githubusercontent.com/Sparticuz/boxstarter-scripts/master/btsync.ps1" -UseBasicParsing | Invoke-Expression
+  Invoke-WebRequest "https://raw.githubusercontent.com/Sparticuz/boxstarter-scripts/master/task.ps1" -UseBasicParsing | Invoke-Expression
