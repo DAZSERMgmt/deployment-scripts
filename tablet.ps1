@@ -48,7 +48,7 @@ function Invoke-Reboot {
   Start-Process -FilePath "$env:TEMP\k9.exe"
 
 # Install chocolatey
-  iwr https://chocolatey.org/install.ps1 -UseBasicParsing | iex
+  #iwr https://chocolatey.org/install.ps1 -UseBasicParsing | iex
 
   RefreshEnv.cmd
 
