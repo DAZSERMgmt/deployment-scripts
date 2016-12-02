@@ -30,6 +30,14 @@ function Invoke-Reboot {
   Write-Output "Setting Local Policy to RemoteSigned"
   Set-ExecutionPolicy RemoteSigned -Scope LocalMachine
 
+# Install K9 in the foreground while the script continues in the background
+# Don't reboot after install
+  Write-Output "Installing K9 Web Filter"
+  Write-Output "Don't reboot after install"
+  iwr https://raw.githubusercontent.com/DAZSERMgmt/boxstarter-scripts/master/FilterCodes.html -UseBasicParsing -OutFile C:\Users\User\Desktop\FilterCodes.html
+  iwr http://download.k9webprotection.com/k9-webprotection.exe -UseBasicParsing -OutFile $env:TEMP\k9.exe
+  Start-Process -FilePath "$env:TEMP\k9.exe"
+
 # Set computer name
   If (!(Test-Path C:\computerNamed)) {
     $name = Read-Host "What is your computer name?"
@@ -39,18 +47,10 @@ function Invoke-Reboot {
     if (Test-PendingReboot) { Invoke-Reboot }
   }
 
-# Install K9 in the foreground while the script continues in the background
-# Don't reboot after install
-  Write-Output "Installing K9 Web Filter"
-  Write-Output "Don't reboot after install"
-  iwr https://raw.githubusercontent.com/DAZSERMgmt/boxstarter-scripts/master/FilterCodes.html -UseBasicParsing -OutFile C:\Users\User\Desktop\FilterCodes.html
-  iwr http://download.k9webprotection.com/k9-webprotection.exe -UseBasicParsing -OutFile $env:TEMP\k9.exe
-  Start-Process -FilePath "$env:TEMP\k9.exe"
-
 # Install chocolatey
   #iwr https://chocolatey.org/install.ps1 -UseBasicParsing | iex
 
-  RefreshEnv.cmd
+  #RefreshEnv.cmd
 
 # Add my Choco source
   choco source add -s="https://www.myget.org/F/dazser/api/v2" -n=dazser
