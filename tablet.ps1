@@ -11,9 +11,9 @@ function Test-PendingReboot {
 function Invoke-Reboot {
   #Need to create startup to call install.ps1 again
   Write-Output "Writing Restart file"
-  $startup = "$env:appdata\Microsoft\Windows\Start Menu\Programs\Startup"
-  Invoke-WebRequest https://raw.githubusercontent.com/Sparticuz/boxstarter-scripts/master/install.ps1 -OutFile $env:USERPROFILE\Desktop\install.ps1
-  $restartScript = 'powershell.exe -File "%USERPROFILE%\Desktop\install.ps1"'
+  $startup = "C:\Users\User\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup"
+  Invoke-WebRequest https://raw.githubusercontent.com/Sparticuz/boxstarter-scripts/master/install.ps1 -OutFile C:\Users\User\Desktop\install.ps1
+  $restartScript = 'powershell.exe -File "C:\Users\User\Desktop\install.ps1"'
   New-Item "$startup\post-restart.bat" -type file -force -value $restartScript | Out-Null
 
   Restart-Computer -Force
@@ -113,12 +113,12 @@ function Invoke-Reboot {
 
   $Shell = New-Object -ComObject ("WScript.Shell")
 
-  $App = $Shell.CreateShortcut($env:USERPROFILE + "\Desktop\DAZSER Web App.url")
+  $App = $Shell.CreateShortcut("C:\Users\User\Desktop\DAZSER Web App.url")
   $App.TargetPath = "https://www.dazser.net"
   #$App.IconLocation = "$env:windir\System32\shell32.dll, 13"
   $App.Save()
 
-  $Mail = $Shell.CreateShortcut($env:USERPROFILE + "\Desktop\Web Mail.url")
+  $Mail = $Shell.CreateShortcut("C:\Users\User\Desktop\Web Mail.url")
   $Mail.TargetPath = "https://mail.dazser.com"
   #$Mail.IconLocation = "$env:windir\System32\shell32.dll, 42"
   $Mail.Save()
