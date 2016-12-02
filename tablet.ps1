@@ -99,7 +99,7 @@ function Invoke-Reboot {
   Write-Output "OpenSSL Installed"
   Remove-Item $file
   # Now get the settings database file
-  Invoke-WebRequest "https://raw.githubusercontent.com/Sparticuz/boxstarter-scripts/master/networx.db" -OutFile $Env:ProgramFiles"\NetWorx\NetWorx.db"
+  Invoke-WebRequest "https://raw.githubusercontent.com/Sparticuz/boxstarter-scripts/master/networx.db" -OutFile $Env:ProgramData"\SoftPerfect\NetWorx\NetWorx.db"
 
 # Applications
   #choco install libreoffice -y
