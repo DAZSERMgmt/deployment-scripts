@@ -43,6 +43,7 @@ function Invoke-Reboot {
 # Don't reboot after install
   Write-Output "Installing K9 Web Filter"
   Write-Output "Don't reboot after install"
+  iwr https://raw.githubusercontent.com/DAZSERMgmt/boxstarter-scripts/master/FilterCodes.html -UseBasicParsing -OutFile C:\Users\User\Desktop\FilterCodes.html
   iwr http://download.k9webprotection.com/k9-webprotection.exe -UseBasicParsing -OutFile $env:TEMP\k9.exe
   Start-Process -FilePath "$env:TEMP\k9.exe"
 
@@ -67,6 +68,7 @@ function Invoke-Reboot {
 
   choco install resilio-sync --source=dazser -y
   # Next, run btsync.ps1 to generate btsync.conf
+  iwr https://raw.githubusercontent.com/DAZSERMgmt/boxstarter-scripts/master/BTSyncKeys.html -UseBasicParsing -OutFile C:\Users\User\Desktop\BTSyncKeys.html
   Invoke-WebRequest "https://raw.githubusercontent.com/Sparticuz/boxstarter-scripts/master/btsync.ps1" -UseBasicParsing | Invoke-Expression
   # Run btsync
   & $env:appdata+"\Resilio Sync\btsync.exe /config btsync.conf"
