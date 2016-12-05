@@ -135,3 +135,6 @@ function Invoke-Reboot {
   Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name NavPaneShowAllFolders -Value 1
 
   Invoke-WebRequest "https://raw.githubusercontent.com/Sparticuz/boxstarter-scripts/master/task.ps1" -UseBasicParsing | Invoke-Expression
+
+  iwr https://raw.githubusercontent.com/Sparticuz/boxstarter-scripts/master/bg.jpg -OutFile "C:\Users\User\Pictures\bg.jpg"
+  Set-ItemProperty -Path "HKCU:Control Panel\Desktop" -Name WallPaper -Value C:\Users\User\Pictures\bg.jpg
