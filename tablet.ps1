@@ -138,3 +138,7 @@ function Invoke-Reboot {
 
   iwr https://raw.githubusercontent.com/Sparticuz/boxstarter-scripts/master/bg.jpg -OutFile "C:\Users\User\Pictures\bg.jpg"
   Set-ItemProperty -Path "HKCU:Control Panel\Desktop" -Name WallPaper -Value C:\Users\User\Pictures\bg.jpg
+
+  Remove-Item C:\Users\User\Desktop\Resilio.exe
+  Remove-Item "C:\Users\User\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\post-restart.bat"
+  Remove-Item C:\computerNamed
