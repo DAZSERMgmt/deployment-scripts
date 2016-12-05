@@ -12,6 +12,4 @@ Start-Process powershell -ArgumentList "-noprofile", "-file ${env:temp}\tablet.p
 
 # Cleanup after Process done
 Remove-Item C:\Users\User\Desktop\install.ps1
-Remove-Item C:\Users\User\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\post-restart.bat
 Remove-Item $env:temp\tablet.ps1
-Remove-Item C:\computerNamed
