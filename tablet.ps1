@@ -32,11 +32,13 @@ function Invoke-Reboot {
 
 # Install K9 in the foreground while the script continues in the background
 # Don't reboot after install
-  Write-Output "Installing K9 Web Filter"
-  Write-Output "Don't reboot after install"
-  iwr https://raw.githubusercontent.com/DAZSERMgmt/boxstarter-scripts/master/FilterCodes.html -UseBasicParsing -OutFile C:\Users\User\Desktop\FilterCodes.html
-  iwr http://download.k9webprotection.com/k9-webprotection.exe -UseBasicParsing -OutFile $env:TEMP\k9.exe
-  Start-Process -FilePath "$env:TEMP\k9.exe"
+  If (!(Test-Path "C:\Program Files\Blue Coat K9 Web Protection")){
+    Write-Output "Installing K9 Web Filter"
+    Write-Output "Don't reboot after install"
+    iwr https://raw.githubusercontent.com/DAZSERMgmt/boxstarter-scripts/master/FilterCodes.html -UseBasicParsing -OutFile C:\Users\User\Desktop\FilterCodes.html
+    iwr http://download.k9webprotection.com/k9-webprotection.exe -UseBasicParsing -OutFile $env:TEMP\k9.exe
+    Start-Process -FilePath "$env:TEMP\k9.exe"
+  }
 
 # Set computer name
   If (!(Test-Path C:\computerNamed)) {
