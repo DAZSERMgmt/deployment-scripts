@@ -75,7 +75,7 @@ function Invoke-Reboot {
   # Run btsync
   #$env:appdata+"\Resilio Sync\btsync.exe /config btsync.conf"
 
-  choco install networx --version=5.5.5.20161128 -y
+  choco install networx --source=dazser -y
   Write-Output "Stopping networx"
   $proc = Get-Process networx -ErrorAction SilentlyContinue
   if ($proc) {
