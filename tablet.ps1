@@ -35,8 +35,8 @@ function Invoke-Reboot {
   If (!(Test-Path "C:\Program Files\Blue Coat K9 Web Protection")){
     Write-Output "Installing K9 Web Filter"
     Write-Output "Don't reboot after install"
-    iwr https://raw.githubusercontent.com/DAZSERMgmt/boxstarter-scripts/master/FilterCodes.html -UseBasicParsing -OutFile C:\Users\User\Desktop\FilterCodes.html
-    iwr http://download.k9webprotection.com/k9-webprotection.exe -UseBasicParsing -OutFile $env:TEMP\k9.exe
+    Invoke-WebRequest https://raw.githubusercontent.com/DAZSERMgmt/boxstarter-scripts/master/FilterCodes.html -UseBasicParsing -OutFile C:\Users\User\Desktop\FilterCodes.html
+    Invoke-WebRequest http://download.k9webprotection.com/k9-webprotection.exe -UseBasicParsing -OutFile $env:TEMP\k9.exe
     Start-Process -FilePath "$env:TEMP\k9.exe"
   }
 
@@ -44,8 +44,8 @@ function Invoke-Reboot {
   If (!(Test-Path C:\computerNamed)) {
     $name = Read-Host "What is your computer name?"
     Rename-Computer -NewName $name
-    echo $name >> C:\computerNamed
-    echo "" >> C:\rebootNeeded
+    Write-Output $name >> C:\computerNamed
+    Write-Output "" >> C:\rebootNeeded
     if (Test-PendingReboot) { Invoke-Reboot }
   }
 
@@ -70,7 +70,7 @@ function Invoke-Reboot {
 
   #choco install resilio-sync --source=dazser -y
   # Next, run btsync.ps1 to generate btsync.conf
-  iwr https://raw.githubusercontent.com/DAZSERMgmt/boxstarter-scripts/master/BTSyncKeys.html -UseBasicParsing -OutFile C:\Users\User\Desktop\BTSyncKeys.html
+  Invoke-WebRequest https://raw.githubusercontent.com/DAZSERMgmt/boxstarter-scripts/master/BTSyncKeys.html -UseBasicParsing -OutFile C:\Users\User\Desktop\BTSyncKeys.html
   Invoke-WebRequest "https://raw.githubusercontent.com/Sparticuz/boxstarter-scripts/master/btsync.ps1" -UseBasicParsing | Invoke-Expression
   # Run btsync
   #$env:appdata+"\Resilio Sync\btsync.exe /config btsync.conf"
@@ -82,7 +82,7 @@ function Invoke-Reboot {
     # try gracefully first
     $proc.CloseMainWindow()
     # kill after five seconds
-    Sleep 5
+    Start-Sleep 5
     if (!$proc.HasExited) {
       $proc | Stop-Process -Force
     }
@@ -136,7 +136,7 @@ function Invoke-Reboot {
 
   Invoke-WebRequest "https://raw.githubusercontent.com/Sparticuz/boxstarter-scripts/master/task.ps1" -UseBasicParsing | Invoke-Expression
 
-  iwr https://raw.githubusercontent.com/Sparticuz/boxstarter-scripts/master/bg.jpg -OutFile "C:\Users\User\Pictures\bg.jpg"
+  Invoke-WebRequest https://raw.githubusercontent.com/Sparticuz/boxstarter-scripts/master/bg.jpg -OutFile "C:\Users\User\Pictures\bg.jpg"
   Set-ItemProperty -Path "HKCU:Control Panel\Desktop" -Name WallPaper -Value C:\Users\User\Pictures\bg.jpg
 
   #Remove-Item C:\Users\User\Desktop\Resilio.exe
