@@ -12,7 +12,7 @@ $Boxstarter.AutoLogin=$true
 
 	tzutil /s "Eastern Standard Time"
 
-	if ((Test-Path D:) -and ((Get-Volume -DriveLetter D | Select -ExpandProperty DriveType) -eq "Fixed")) {
+	if ((Test-Path D:) -and ((Get-Volume -DriveLetter D | Select-Object -ExpandProperty DriveType) -eq "Fixed")) {
 		Move-LibraryDirectory "My Pictures" "D:\Pictures"
 		Move-LibraryDirectory "My Video" "D:\Videos"
 		Move-LibraryDirectory "My Music" "D:\Music"
@@ -35,10 +35,12 @@ $Boxstarter.AutoLogin=$true
 	choco install vcredist2012 -y
 	choco install vcredist2013 -y
 	choco install vcredist2015 -y
+	choco install vcredist2017 -y
 
 # Tools & Utilities
 	choco install 7zip -y
 	choco install baretail -y
+	choco install checksum -y
 	choco install crashplan -y
 	choco install emet -y
 	choco install git -y
@@ -47,6 +49,7 @@ $Boxstarter.AutoLogin=$true
 	choco install heidisql -y
 	# choco install Microsoft-Hyper-V-Tools-All -source windowsfeatures -y /enablefeature /all #failed
 	choco install mysql.workbench -y
+	choco install nssm
 	choco install putty.install -y
 	choco install rdcman -y
 	choco install rdmfree -y
@@ -74,7 +77,7 @@ $Boxstarter.AutoLogin=$true
 	choco install lastpass -y
 	choco install libreoffice -y
 	choco install malwarebytes -y
-	choco install markdownpad2 -y
+	choco install mkvtoolnix -y
 	choco install mp3tag -y
 	choco install skype -y
 	choco install slack -y
@@ -106,8 +109,6 @@ $Boxstarter.AutoLogin=$true
 
 	#Install WSL
 	choco install Microsoft-Windows-Subsystem-Linux -source windowsfeatures -y
-
-	
 
 Enable-UAC
 Enable-MicrosoftUpdate
