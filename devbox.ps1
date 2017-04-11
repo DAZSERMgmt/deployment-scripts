@@ -47,7 +47,7 @@ $Boxstarter.AutoLogin=$true
 	choco install github -y
 	choco install glasswire -y
 	choco install heidisql -y
-	# choco install Microsoft-Hyper-V-Tools-All -source windowsfeatures -y /enablefeature /all #failed
+	choco install Microsoft-Hyper-V-Tools-All -source WindowsFeatures
 	choco install mysql.workbench -y
 	choco install nssm
 	choco install putty.install -y
@@ -82,12 +82,13 @@ $Boxstarter.AutoLogin=$true
 	choco install skype -y
 	choco install slack -y
 	choco install spotify -y
-	#choco install sublimetext3 -y
-	#choco install sublimetext3.packagecontrol -y
+	choco install sublimetext3 -y
+	choco install sublimetext3.packagecontrol -y
 	choco install sumatrapdf -y
 	choco install treesizefree -y
 	choco install visualstudiocode -y
 	choco install vlc -y
+	choco install zoom -y
 
 # Browsers
 	choco install firefox -y
