@@ -5,10 +5,10 @@ $Boxstarter.NoPassword=$false
 $Boxstarter.AutoLogin=$true
 
 # Windows Stuff
+	Update-ExecutionPolicy RemoteSigned	
 	Disable-UAC
 	Disable-BingSearch
 	Set-WindowsExplorerOptions -EnableShowHiddenFilesFoldersDrives -DisableOpenFileExplorerToQuickAccess -EnableShowFileExtensions -EnableShowFullPathInTitleBar -EnableShowRecentFilesInQuickAccess -EnableShowFrequentFoldersInQuickAccess -EnableExpandToOpenFolder
-	Update-ExecutionPolicy RemoteSigned
 
 	tzutil /s "Eastern Standard Time"
 
@@ -41,13 +41,16 @@ $Boxstarter.AutoLogin=$true
 	choco install 7zip -y
 	choco install baretail -y
 	choco install checksum -y
-	choco install crashplan -y
+	#choco install crashplan -y
+	choco install dellcommandupdate -y
 	choco install emet -y
 	choco install git -y
 	choco install github -y
 	choco install glasswire -y
 	choco install heidisql -y
-	choco install Microsoft-Hyper-V-Tools-All -source WindowsFeatures
+	choco install Microsoft-Hyper-V-Tools-All -source WindowsFeatures -y
+	#Install WSL
+	choco install Microsoft-Windows-Subsystem-Linux -source windowsfeatures -y
 	choco install mysql.workbench -y
 	choco install nssm
 	choco install putty.install -y
@@ -65,22 +68,27 @@ $Boxstarter.AutoLogin=$true
 
 # Applications
 	#choco install atom -y
+	choco install adobe-creative-cloud -y
+	choco install authy-desktop -y
 	choco install calibre -y
 	choco install ccleaner -y	#rebooted?
 	choco install ccenhancer -y
 	choco install deluge -y
+	choco install discord -y
 	choco install dropbox -y
+	choco install eac -y
 	choco install greenshot -y
-	choco install googledrive -y
+	#choco install googledrive -y
 	choco install handbrake -y
 	choco install itunes -y
 	choco install lastpass -y
 	choco install libreoffice -y
+	choco install makemkv -y
 	choco install malwarebytes -y
 	choco install mkvtoolnix -y
 	choco install mp3tag -y
-	choco install skype -y
-	choco install slack -y
+	#choco install skype -y
+	#choco install slack -y Domain Installed
 	choco install spotify -y
 	choco install sublimetext3 -y
 	choco install sublimetext3.packagecontrol -y
@@ -99,17 +107,45 @@ $Boxstarter.AutoLogin=$true
 	Install-ChocolateyPinnedTaskBarItem "$env:SystemRoot\system32\WindowsPowerShell\v1.0\powershell.exe"
 
 # Windows Stuff
-	#Show Powershell on Win+X instead of Command Prompt #kill explorer
+
+	# Remove Windows Apps
+	# 3D Builder
+	Get-AppxPackage Microsoft.3DBuilder | Remove-AppxPackage
+	# Autodesk
+	Get-AppxPackage *Autodesk* | Remove-AppxPackage
+	# BubbleWitch
+	Get-AppxPackage *BubbleWitch* | Remove-AppxPackage
+	# Candy Crush
+	Get-AppxPackage king.com.CandyCrush* | Remove-AppxPackage
+	# Get Started
+	Get-AppxPackage Microsoft.Getstarted | Remove-AppxPackage
+	# March of Empires
+	Get-AppxPackage *MarchofEmpires* | Remove-AppxPackage
+	# McAfee Security
+	Get-AppxPackage *McAfee* | Remove-AppxPackage
+	# Office Hub
+	Get-AppxPackage Microsoft.MicrosoftOfficeHub | Remove-AppxPackage
+	# Windows Phone Companion
+	Get-AppxPackage Microsoft.WindowsPhone | Remove-AppxPackage
+
+	#Show Powershell on Win+X instead of Command Prompt 
 	Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name DontUsePowerShellOnWinX -Value 0
+
 	#File Explorer preferences
 	Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name NavPaneExpandToCurrentFolder -Value 1
 	Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name NavPaneShowAllFolders -Value 1
-	Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name LaunchTo -Value 1
-    Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name MMTaskbarMode -Value 2
-    #taskbar preferences
+	Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name MMTaskbarMode -Value 2
+		
+	# Change Explorer home screen back to "This PC"
+	Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name LaunchTo -Type DWord -Value 1
+	# Change it back to "Quick Access" (Windows 10 default)
+	#Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name LaunchTo -Type DWord -Value 2
 
-	#Install WSL
-	choco install Microsoft-Windows-Subsystem-Linux -source windowsfeatures -y
+	# Privacy: Let apps use my advertising ID: Disable
+	If (-Not (Test-Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\AdvertisingInfo")) {
+		New-Item -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\AdvertisingInfo | Out-Null
+	}
+	Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\AdvertisingInfo -Name Enabled -Type DWord -Value 0
 
 Enable-UAC
 Enable-MicrosoftUpdate
