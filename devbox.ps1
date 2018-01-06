@@ -71,7 +71,7 @@ $Boxstarter.AutoLogin=$true
 	choco install adobe-creative-cloud -y
 	choco install authy-desktop -y
 	choco install calibre -y
-	choco install ccleaner -y	#rebooted?
+	#choco install ccleaner -y	#rebooted?
 	choco install ccenhancer -y
 	choco install deluge -y
 	choco install discord -y
