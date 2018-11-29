@@ -74,17 +74,41 @@ function Invoke-Reboot {
   $Mail.Save()
 
 # Windows Stuff
-  #Show Powershell on Win+X instead of Command Prompt #kill explorer
-  Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name DontUsePowerShellOnWinX -Value 0
-  #File Explorer preferences
-  Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name NavPaneExpandToCurrentFolder -Value 1
-  Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name NavPaneShowAllFolders -Value 1
+  # Remove Windows Apps
+	# 3D Builder
+	Get-AppxPackage Microsoft.3DBuilder | Remove-AppxPackage
+	# Autodesk
+	Get-AppxPackage *Autodesk* | Remove-AppxPackage
+	# BubbleWitch
+	Get-AppxPackage *BubbleWitch* | Remove-AppxPackage
+	# Candy Crush
+	Get-AppxPackage king.com.CandyCrush* | Remove-AppxPackage
+	# Get Started
+	Get-AppxPackage Microsoft.Getstarted | Remove-AppxPackage
+	# March of Empires
+	Get-AppxPackage *MarchofEmpires* | Remove-AppxPackage
+	# McAfee Security
+	Get-AppxPackage *McAfee* | Remove-AppxPackage
+	# Office Hub
+	Get-AppxPackage Microsoft.MicrosoftOfficeHub | Remove-AppxPackage
 
-  Invoke-WebRequest "https://raw.githubusercontent.com/Sparticuz/boxstarter-scripts/master/task.ps1" -UseBasicParsing | Invoke-Expression
+	#Show Powershell on Win+X instead of Command Prompt 
+	Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name DontUsePowerShellOnWinX -Value 0
+
+	#File Explorer preferences
+	Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name NavPaneExpandToCurrentFolder -Value 1
+	Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name NavPaneShowAllFolders -Value 1
+	Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name MMTaskbarMode -Value 2
+
+	#Disallow Shake to Minimize
+	Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name DisallowShaking -Value 1
+		
+	# Change Explorer home screen back to "This PC"
+	Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name LaunchTo -Type DWord -Value 1
 
   Invoke-WebRequest https://raw.githubusercontent.com/Sparticuz/boxstarter-scripts/master/bg.jpg -OutFile "C:\Users\User\Pictures\bg.jpg"
   Set-ItemProperty -Path "HKCU:Control Panel\Desktop" -Name WallPaper -Value C:\Users\User\Pictures\bg.jpg
 
-  #Remove-Item C:\Users\User\Desktop\Resilio.exe
+  Install-ChocolateyPinnedTaskBarItem "$env:windir\explorer.exe"
+
   Remove-Item "C:\Users\User\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\post-restart.bat"
-  Remove-Item C:\computerNamed
