@@ -68,8 +68,8 @@ function Invoke-Reboot {
   #$App.IconLocation = "$env:windir\System32\shell32.dll, 13"
   $App.Save()
 
-  $Mail = $Shell.CreateShortcut("C:\Users\User\Desktop\Web Mail.url")
-  $Mail.TargetPath = "https://mail.dazser.com"
+  $Mail = $Shell.CreateShortcut("C:\Users\User\Desktop\E-Mail.url")
+  $Mail.TargetPath = "https://mail.google.com/a/dazser.com"
   #$Mail.IconLocation = "$env:windir\System32\shell32.dll, 42"
   $Mail.Save()
 
