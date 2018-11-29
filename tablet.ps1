@@ -46,11 +46,14 @@ function Invoke-Reboot {
   RefreshEnv
 
 # Updates & Backend
+  choco install powershell -y
+  
 # Applications
-  #choco install libreoffice -y
-  #choco install skype -y
-  #choco install slack -y
-  #choco install zoom -y
+  choco install libreoffice-fresh -y
+  choco install skype -y
+  choco install slack -y
+  choco install zoom -y
+  choco install google-drive-file-stream --ignore-checksum -y
 
 # Browsers
   choco install googlechrome -y
