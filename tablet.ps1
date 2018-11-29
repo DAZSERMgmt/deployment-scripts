@@ -37,6 +37,7 @@ function Invoke-Reboot {
     Invoke-WebRequest https://raw.githubusercontent.com/DAZSERMgmt/boxstarter-scripts/master/FilterCodes.html -UseBasicParsing -OutFile C:\Users\User\Desktop\FilterCodes.html
     Invoke-WebRequest http://download.k9webprotection.com/k9-webprotection.exe -UseBasicParsing -OutFile $env:TEMP\k9.exe
     Start-Process -FilePath "$env:TEMP\k9.exe"
+    Invoke-Item C:\Users\User\Desktop\FilterCodes.html
   }
 
 # Install chocolatey
