@@ -41,12 +41,9 @@ function Invoke-Reboot {
   }
 
 # Install chocolatey
-  #iwr https://chocolatey.org/install.ps1 -UseBasicParsing | iex
+  Invoke-WebRequest https://chocolatey.org/install.ps1 -UseBasicParsing | Invoke-Expression
 
-  #RefreshEnv.cmd
-
-# Add my Choco source
-  choco source add -s="https://www.myget.org/F/dazser/api/v2" -n=dazser
+  RefreshEnv
 
 # Updates & Backend
   #choco install powershell --source=chocolatey -y
