@@ -46,51 +46,6 @@ function Invoke-Reboot {
   RefreshEnv
 
 # Updates & Backend
-  #choco install powershell --source=chocolatey -y
-  #choco install javaruntime --source=chocolatey -y
-
-# Tools
-  #choco install emet -y
-  # Configure EMET
-  #Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Sparticuz/boxstarter-scripts/master/EMET-Settings.xml" -OutFile ${Env:ProgramFiles(x86)}"\EMET 5.5\MyEMETSettings.xml"
-  #$path = ${Env:ProgramFiles(x86)}+"\EMET 5.5"
-  #& $path\EMET_Conf.exe --import $path\MyEMETSettings.xml
-
-  #choco install resilio-sync --source=dazser -y
-  # Next, run btsync.ps1 to generate btsync.conf
-  Invoke-WebRequest https://raw.githubusercontent.com/DAZSERMgmt/boxstarter-scripts/master/BTSyncKeys.html -UseBasicParsing -OutFile C:\Users\User\Desktop\BTSyncKeys.html
-  Invoke-WebRequest "https://raw.githubusercontent.com/Sparticuz/boxstarter-scripts/master/btsync.ps1" -UseBasicParsing | Invoke-Expression
-  # Run btsync
-  #$env:appdata+"\Resilio Sync\btsync.exe /config btsync.conf"
-
-  choco install networx --source=dazser -y
-  Write-Output "Stopping networx"
-  $proc = Get-Process networx -ErrorAction SilentlyContinue
-  if ($proc) {
-    # try gracefully first
-    $proc.CloseMainWindow()
-    # kill after five seconds
-    Start-Sleep 5
-    if (!$proc.HasExited) {
-      $proc | Stop-Process -Force
-    }
-  }
-  Remove-Variable proc
-  # Now get the OpenSSL files
-  $file = "$env:TEMP\openssl.zip"
-  Write-Output "Grabbing OpenSSL"
-  Invoke-WebRequest -Uri "https://indy.fulgan.com/SSL/openssl-1.0.2j-x64_86-win64.zip" -OutFile $file
-  # Unzip the file to specified location
-  $shell_app = New-Object -Com Shell.Application 
-  $zip_file = $shell_app.namespace($file)
-  $path = $Env:ProgramFiles+"\Networx\"
-  $destination = $shell_app.namespace($path) 
-  $destination.Copyhere($zip_file.items())
-  Write-Output "OpenSSL Installed"
-  Remove-Item $file
-  # Now get the settings database file
-  Invoke-WebRequest "https://raw.githubusercontent.com/Sparticuz/boxstarter-scripts/master/networx.db" -OutFile $Env:ProgramData"\SoftPerfect\NetWorx\NetWorx.db"
-
 # Applications
   #choco install libreoffice -y
   #choco install skype -y
