@@ -15,7 +15,6 @@ function Invoke-Reboot {
   Invoke-WebRequest https://raw.githubusercontent.com/Sparticuz/boxstarter-scripts/master/install.ps1 -OutFile C:\Users\User\Desktop\install.ps1
   $restartScript = 'powershell.exe -File "C:\Users\User\Desktop\install.ps1"'
   New-Item "$startup\post-restart.bat" -type file -force -value $restartScript | Out-Null
-
   Restart-Computer -Force
 }
 
@@ -38,15 +37,6 @@ function Invoke-Reboot {
     Invoke-WebRequest https://raw.githubusercontent.com/DAZSERMgmt/boxstarter-scripts/master/FilterCodes.html -UseBasicParsing -OutFile C:\Users\User\Desktop\FilterCodes.html
     Invoke-WebRequest http://download.k9webprotection.com/k9-webprotection.exe -UseBasicParsing -OutFile $env:TEMP\k9.exe
     Start-Process -FilePath "$env:TEMP\k9.exe"
-  }
-
-# Set computer name
-  If (!(Test-Path C:\computerNamed)) {
-    $name = Read-Host "What is your computer name?"
-    Rename-Computer -NewName $name
-    Write-Output $name >> C:\computerNamed
-    Write-Output "" >> C:\rebootNeeded
-    if (Test-PendingReboot) { Invoke-Reboot }
   }
 
 # Install chocolatey
