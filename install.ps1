@@ -6,7 +6,7 @@ if (!($policy -eq "RemoteSigned")) {
 }
 
 Write-Output "Pulling tablet.ps1"
-Invoke-WebRequest https://raw.githubusercontent.com/DAZSERMgmt/boxstarter-scripts/master/tablet.ps1 -OutFile $env:temp\tablet.ps1 
+Invoke-WebRequest https://raw.githubusercontent.com/DAZSERMgmt/deployment-scripts/master/tablet.ps1 -OutFile $env:temp\tablet.ps1 
 Write-Output  "Executing tablet.ps1"
 Start-Process powershell -ArgumentList "-noprofile", "-file ${env:temp}\tablet.ps1" -Verb RunAs -Wait
 

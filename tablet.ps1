@@ -12,7 +12,7 @@ function Invoke-Reboot {
   #Need to create startup to call install.ps1 again
   Write-Output "Writing Restart file"
   $startup = "$env:appdata\Microsoft\Windows\Start Menu\Programs\Startup"
-  Invoke-WebRequest https://raw.githubusercontent.com/DAZSERMgmt/boxstarter-scripts/master/install.ps1 -OutFile $home\Desktop\install.ps1
+  Invoke-WebRequest https://raw.githubusercontent.com/DAZSERMgmt/deployment-scripts/master/install.ps1 -OutFile $home\Desktop\install.ps1
   $restartScript = "powershell.exe -File '${home}\Desktop\install.ps1'"
   New-Item "$startup\post-restart.bat" -type file -force -value $restartScript | Out-Null
   Restart-Computer -Force
@@ -30,7 +30,7 @@ function Invoke-Reboot {
   Set-ExecutionPolicy RemoteSigned -Scope LocalMachine
 
 # Just download K9 while the script continues in the background
-  Invoke-WebRequest https://raw.githubusercontent.com/DAZSERMgmt/boxstarter-scripts/master/FilterCodes.html -UseBasicParsing -OutFile $home\Desktop\FilterCodes.html
+  Invoke-WebRequest https://raw.githubusercontent.com/DAZSERMgmt/deployment-scripts/master/FilterCodes.html -UseBasicParsing -OutFile $home\Desktop\FilterCodes.html
   Invoke-WebRequest http://download.k9webprotection.com/k9-webprotection.exe -UseBasicParsing -OutFile $home\Desktop\k9.exe
 
 # Install chocolatey
@@ -51,8 +51,8 @@ function Invoke-Reboot {
 # Browsers
   choco install googlechrome -y
   # Copy master_preferences to Chrome profile
-  Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Sparticuz/boxstarter-scripts/master/master_preferences" -OutFile ${Env:ProgramFiles(x86)}"\Google\Chrome\Application\master_preferences"
-  Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Sparticuz/boxstarter-scripts/master/initialbookmarks.html" -OutFile ${Env:ProgramFiles(x86)}"\Google\Chrome\Application\initialbookmarks.html"
+  Invoke-WebRequest -Uri "https://raw.githubusercontent.com/DAZSERMgmt/deployment-scripts/master/master_preferences" -OutFile ${Env:ProgramFiles(x86)}"\Google\Chrome\Application\master_preferences"
+  Invoke-WebRequest -Uri "https://raw.githubusercontent.com/DAZSERMgmt/deployment-scripts/master/initialbookmarks.html" -OutFile ${Env:ProgramFiles(x86)}"\Google\Chrome\Application\initialbookmarks.html"
 
   $Shell = New-Object -ComObject ("WScript.Shell")
 
@@ -99,9 +99,10 @@ function Invoke-Reboot {
 	# Change Explorer home screen back to "This PC"
 	Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name LaunchTo -Type DWord -Value 1
 
-  Invoke-WebRequest https://raw.githubusercontent.com/Sparticuz/boxstarter-scripts/master/bg.jpg -OutFile "${home}\Pictures\bg.jpg"
+  Invoke-WebRequest https://raw.githubusercontent.com/DAZSERMgmt/deployment-scripts/master/bg.jpg -OutFile "${home}\Pictures\bg.jpg"
   Set-ItemProperty -Path "HKCU:Control Panel\Desktop" -Name WallPaper -Value ${home}\Pictures\bg.jpg
+  rundll32.exe user32.dll, UpdatePerUserSystemParameters
 
-  Install-ChocolateyPinnedTaskBarItem "$env:windir\explorer.exe"
-
-  Remove-Item "$env:appdata\Microsoft\Windows\Start Menu\Programs\Startup\post-restart.bat"
+  If (Test-Path "$env:appdata\Microsoft\Windows\Start Menu\Programs\Startup\post-restart.bat") {
+    Remove-Item "$env:appdata\Microsoft\Windows\Start Menu\Programs\Startup\post-restart.bat"
+  }
