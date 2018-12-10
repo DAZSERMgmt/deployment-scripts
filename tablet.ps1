@@ -42,7 +42,7 @@ function Invoke-Reboot {
   choco install powershell -y
   
 # Applications
-  choco install libreoffice-fresh --ignore-checksum -y
+  #choco install libreoffice-fresh --ignore-checksum -y
   choco install skype -y
   choco install slack -y
   choco install zoom -y
