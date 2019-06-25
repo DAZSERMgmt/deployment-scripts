@@ -43,7 +43,7 @@ $Boxstarter.AutoLogin=$true
 	choco install checksum -y
 	#choco install crashplan -y
 	choco install dellcommandupdate -y
-	choco install emet -y
+	#choco install emet -y
 	choco install git -y
 	choco install github -y
 	choco install glasswire -y
@@ -52,7 +52,7 @@ $Boxstarter.AutoLogin=$true
 	#Install WSL
 	choco install Microsoft-Windows-Subsystem-Linux -source windowsfeatures -y
 	choco install mysql.workbench -y
-	choco install nssm
+	choco install nssm -y
 	choco install putty.install -y
 	choco install rdcman -y
 	choco install rdmfree -y
@@ -75,26 +75,28 @@ $Boxstarter.AutoLogin=$true
 	choco install ccenhancer -y
 	choco install deluge -y
 	choco install discord -y
-	choco install dropbox -y
+	#  choco install dropbox -y
 	choco install eac -y
 	choco install greenshot -y
 	#choco install googledrive -y
 	choco install handbrake -y
 	choco install itunes -y
+	choco install joplin -y
 	choco install lastpass -y
 	choco install libreoffice -y
 	choco install makemkv -y
 	choco install malwarebytes -y
 	choco install mkvtoolnix -y
 	choco install mp3tag -y
+	choco install odrive -y
 	#choco install skype -y
 	#choco install slack -y Domain Installed
-	choco install spotify -y
+	#choco install spotify -y
 	choco install sublimetext3 -y
-	choco install sublimetext3.packagecontrol -y
+	#choco install sublimetext3.packagecontrol -y
 	choco install sumatrapdf -y
 	choco install treesizefree -y
-	choco install visualstudiocode -y
+	choco install vscode -y
 	choco install vlc -y
 	choco install zoom -y
 
