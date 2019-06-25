@@ -5,7 +5,7 @@ $Boxstarter.NoPassword=$false
 $Boxstarter.AutoLogin=$true
 
 # Windows Stuff
-	Update-ExecutionPolicy RemoteSigned	
+	Update-ExecutionPolicy RemoteSigned
 	Disable-UAC
 	Disable-BingSearch
 	Set-WindowsExplorerOptions -EnableShowHiddenFilesFoldersDrives -DisableOpenFileExplorerToQuickAccess -EnableShowFileExtensions -EnableShowFullPathInTitleBar -EnableShowRecentFilesInQuickAccess -EnableShowFrequentFoldersInQuickAccess -EnableExpandToOpenFolder
@@ -72,7 +72,7 @@ $Boxstarter.AutoLogin=$true
 	choco install authy-desktop -y
 	choco install calibre -y
 	#choco install ccleaner -y	#rebooted?
-	choco install ccenhancer -y
+	#choco install ccenhancer -y
 	choco install deluge -y
 	choco install discord -y
 	#  choco install dropbox -y
@@ -85,7 +85,7 @@ $Boxstarter.AutoLogin=$true
 	choco install lastpass -y
 	choco install libreoffice -y
 	choco install makemkv -y
-	choco install malwarebytes -y
+	#choco install malwarebytes -y
 	choco install mkvtoolnix -y
 	choco install mp3tag -y
 	choco install odrive -y
@@ -130,7 +130,7 @@ $Boxstarter.AutoLogin=$true
 	# Windows Phone Companion
 	Get-AppxPackage Microsoft.WindowsPhone | Remove-AppxPackage
 
-	#Show Powershell on Win+X instead of Command Prompt 
+	#Show Powershell on Win+X instead of Command Prompt
 	Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name DontUsePowerShellOnWinX -Value 0
 
 	#File Explorer preferences
@@ -140,7 +140,7 @@ $Boxstarter.AutoLogin=$true
 
 	#Disallow Shake to Minimize
 	Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name DisallowShaking -Value 1
-		
+
 	# Change Explorer home screen back to "This PC"
 	Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name LaunchTo -Type DWord -Value 1
 	# Change it back to "Quick Access" (Windows 10 default)
